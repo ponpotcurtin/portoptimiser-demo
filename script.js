@@ -14,6 +14,8 @@ const captionEyebrow = document.getElementById('captionEyebrow');
 const captionTitle = document.getElementById('captionTitle');
 const captionBody = document.getElementById('captionBody');
 const captionNote = document.getElementById('captionNote');
+const sceneProgress = document.getElementById('sceneProgress');
+let activeScene = 0;
 
 const sceneCopy = Array.from(document.querySelectorAll('.step')).map((step, i) => {
   const source = step.querySelector('.step__copy--source');
@@ -34,12 +36,14 @@ function setSceneCaption(i){
   captionTitle.textContent = copy.title;
   captionBody.textContent = copy.body;
   captionNote.textContent = copy.note;
+  sceneProgress.textContent = `${i + 1} / ${sceneCopy.length}`;
   gsap.fromTo('#sceneCaption',{y:10,opacity:.72},{y:0,opacity:1,duration:.28,ease:'power2.out'});
+  gsap.fromTo('.scene-scroll-cue__handle',{scaleY:.72,transformOrigin:'50% 0%'},{scaleY:1,duration:.34,ease:'power2.out'});
 }
 
 function killSceneTweens(){
   gsap.killTweensOf([
-    '.vessel-b','.delay-ghost','.conflict-window',
+    '.vessel-b','.delay-ghost','.delayed-start-marker','.conflict-window','.dependency-row','.dependency-node',
     '.timeline-head','.berth-grid',
     '.decision-layer','.decision-center','.decision-option',
     '.engine-layer','.input-stack span','.output-stack span','.engine-core',
@@ -57,7 +61,10 @@ function resetTransientState(){
   hideLayers();
   gsap.set(['.timeline-head','.berth-grid'],{autoAlpha:1});
   gsap.set('.delay-ghost',{opacity:0});
+  gsap.set('.delayed-start-marker',{opacity:0});
   gsap.set('.conflict-window',{opacity:0});
+  gsap.set('.dependency-row',{autoAlpha:1});
+  gsap.set('.dependency-node',{opacity:1,scale:1});
   gsap.set('.vessel-b',{xPercent:0,background:'#f0ecff',color:'#5d41cc'});
   gsap.set('.decision-option',{y:0,opacity:1});
   gsap.set('.result-card',{y:30,opacity:0,scale:1});
@@ -66,7 +73,7 @@ function resetTransientState(){
   gsap.set('#chatResponse',{opacity:0});
 }
 function showSchedule(){
-  gsap.set(['.timeline-head','.berth-grid'],{autoAlpha:1});
+  gsap.set(['.timeline-head','.berth-grid','.dependency-row'],{autoAlpha:1});
 }
 function baseScene(){
   resetTransientState();
@@ -81,7 +88,9 @@ function disruptionScene(){
   title.textContent='Example disruption: Vessel B +4h';statusText.textContent='Conflict';
   statusDot.style.background='#ff9f0a';statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
   gsap.to('.delay-ghost',{opacity:1,duration:.3});
-  gsap.to('.conflict-window',{opacity:1,duration:.35,delay:.45});
+  gsap.to('.delayed-start-marker',{opacity:1,duration:.3,delay:.4});
+  gsap.to('.conflict-window',{opacity:1,duration:.35,delay:.55});
+  gsap.fromTo('.dependency-node',{opacity:.45,scale:.98},{opacity:1,scale:1,stagger:.08,duration:.35,delay:.3});
   gsap.to('.vessel-b',{xPercent:100,background:'#fff1df',color:'#9a4f00',duration:.9,ease:'power3.inOut'});
 }
 function impactScene(){
@@ -89,6 +98,7 @@ function impactScene(){
   showSchedule();
   gsap.set('.vessel-b',{xPercent:100,background:'#fff1df',color:'#9a4f00'});
   gsap.set('.delay-ghost',{opacity:1});
+  gsap.set('.delayed-start-marker',{opacity:1});
   gsap.set('.conflict-window',{opacity:1});
   gsap.to(shell,{backgroundColor:'rgba(255,248,240,.95)',duration:.25});
   title.textContent='Berth 2 conflict from 15:00';
@@ -98,8 +108,8 @@ function impactScene(){
 }
 function prepareFocusScene(){
   resetTransientState();
-  gsap.set(['.delay-ghost','.conflict-window'],{opacity:0});
-  gsap.to(['.timeline-head','.berth-grid'],{autoAlpha:0,duration:.22,ease:'power2.out'});
+  gsap.set(['.delay-ghost','.delayed-start-marker','.conflict-window'],{opacity:0});
+  gsap.to(['.timeline-head','.berth-grid','.dependency-row'],{autoAlpha:0,duration:.22,ease:'power2.out'});
 }
 
 function decisionScene(){
@@ -178,8 +188,9 @@ function approvalScene(){
 const scenes=[baseScene,disruptionScene,impactScene,decisionScene,chatScene,confirmationScene,engineScene,optionsScene,approvalScene];
 
 function activateScene(i){
-  setSceneCaption(i);
-  scenes[i]();
+  activeScene = Math.max(0, Math.min(i, scenes.length - 1));
+  setSceneCaption(activeScene);
+  scenes[activeScene]();
 }
 
 if(!reduced){
@@ -210,11 +221,48 @@ if(!reduced){
         const max = Math.max(1, steps.length - 1);
         return Math.round(progress * max) / max;
       },
-      duration:{min:.18,max:.42},
-      delay:.06,
+      duration:{min:.14,max:.34},
+      delay:.02,
       ease:'power2.inOut'
     }
   });
+
+  const story = document.querySelector('.story');
+  let gestureLock = false;
+  let touchStartY = null;
+
+  function storyIsActive(){
+    const rect = story.getBoundingClientRect();
+    return rect.top <= 60 && rect.bottom >= window.innerHeight * .65;
+  }
+
+  function goToScene(index){
+    const next = Math.max(0, Math.min(index, steps.length - 1));
+    if(next === activeScene || !steps[next]) return;
+    gestureLock = true;
+    activateScene(next);
+    steps[next].scrollIntoView({behavior:'smooth',block:'start'});
+    window.setTimeout(()=>{gestureLock=false;},520);
+  }
+
+  window.addEventListener('wheel',(event)=>{
+    if(!storyIsActive() || gestureLock || Math.abs(event.deltaY) < 14) return;
+    event.preventDefault();
+    goToScene(activeScene + (event.deltaY > 0 ? 1 : -1));
+  },{passive:false});
+
+  story.addEventListener('touchstart',(event)=>{
+    touchStartY = event.changedTouches[0]?.clientY ?? null;
+  },{passive:true});
+
+  story.addEventListener('touchend',(event)=>{
+    if(!storyIsActive() || gestureLock || touchStartY === null) return;
+    const endY = event.changedTouches[0]?.clientY ?? touchStartY;
+    const delta = touchStartY - endY;
+    touchStartY = null;
+    if(Math.abs(delta) < 38) return;
+    goToScene(activeScene + (delta > 0 ? 1 : -1));
+  },{passive:true});
 
   gsap.from('.poc-flow div',{y:24,opacity:0,stagger:.09,duration:.45,scrollTrigger:{trigger:'.poc-flow',start:'top 75%'}});
   gsap.from('.question-grid div',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.question-grid',start:'top 78%'}});
