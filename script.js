@@ -36,8 +36,13 @@ function impactScene(){
   gsap.to(shell,{backgroundColor:'rgba(255,248,240,.95)',duration:.4});
   title.textContent='Knock-on effects emerge';
 }
+function prepareFocusScene(){
+  gsap.set('.delay-ghost',{opacity:0});
+}
+
 function decisionScene(){
   hideLayers();
+  prepareFocusScene();
   gsap.set('.vessel-b',{xPercent:68});
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
@@ -46,6 +51,7 @@ function decisionScene(){
 }
 function engineScene(){
   hideLayers();
+  prepareFocusScene();
   gsap.to('.engine-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.input-stack span',{x:-20,opacity:0},{x:0,opacity:1,stagger:.08,duration:.4});
   gsap.fromTo('.output-stack span',{x:20,opacity:0},{x:0,opacity:1,stagger:.1,delay:.45,duration:.4});
@@ -60,6 +66,7 @@ function typePrompt(){
 }
 function chatScene(){
   hideLayers();
+  prepareFocusScene();
   gsap.to('.chat-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.chat-card',{y:28,scale:.97,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'power3.out',onComplete:typePrompt});
   gsap.fromTo('.role-strip div',{y:15,opacity:0},{y:0,opacity:1,stagger:.08,delay:.35,duration:.35});
@@ -67,6 +74,7 @@ function chatScene(){
 }
 function optionsScene(){
   hideLayers();
+  prepareFocusScene();
   gsap.to('.options-layer',{autoAlpha:1,duration:.2});
   gsap.to('.option-card',{y:0,opacity:1,stagger:.12,duration:.55,ease:'power3.out'});
   gsap.fromTo('.ob',{scale:1},{scale:1.035,duration:.45,yoyo:true,repeat:1,delay:.6});
@@ -74,6 +82,7 @@ function optionsScene(){
 }
 function approvalScene(){
   hideLayers();
+  prepareFocusScene();
   gsap.to('.approval-layer',{autoAlpha:1,duration:.2});
   gsap.fromTo('.approval-card',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.5)'});
   gsap.fromTo('.approval-icon',{scale:.4,rotation:-18},{scale:1,rotation:0,duration:.5,delay:.25,ease:'back.out(2)'});
