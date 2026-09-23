@@ -15,16 +15,16 @@
   <header class="nav" aria-label="Primary">
     <div class="nav__inner">
       <a class="brand" href="#top" aria-label="PortOptimiser home">PortOptimiser</a>
-      <span class="nav__meta">Illustrative PoC</span>
+      <span class="nav__meta">Illustrative demonstration example</span>
     </div>
   </header>
 
   <main id="top">
     <section class="hero panel panel--light">
       <div class="hero__content reveal">
-        <span class="eyebrow">PORT SCHEDULE RECOVERY</span>
-        <h1>When the plan moves,<br><span class="gradient-text">recovery should move with it.</span></h1>
-        <p class="lead">A scroll-driven concept demonstration of how PortOptimiser could help schedulers explore feasible recovery options after a disruption.</p>
+        <span class="eyebrow">PORT SCHEDULE RECOVERY · ILLUSTRATIVE EXAMPLE</span>
+        <h1>One delay.<br><span class="gradient-text">A recovery decision.</span></h1>
+        <p class="lead">This demonstration uses one simplified example: Vessel B is planned on Berth 2 from 10:00–14:00, followed by Vessel D at 15:00. Vessel B is then delayed by four hours. Scroll to see how PortOptimiser would support the recovery decision.</p>
         <div class="scroll-cue" aria-hidden="true"><span></span><small>Scroll to begin</small></div>
       </div>
       <div class="hero__orb orb-a"></div>
@@ -36,7 +36,7 @@
         <div class="terminal-shell">
           <div class="terminal-topline">
             <div>
-              <span class="micro">LIVE SCENARIO</span>
+              <span class="micro">ILLUSTRATIVE DEMONSTRATION</span>
               <strong id="sceneTitle">Original operating plan</strong>
             </div>
             <div class="status-pill" id="statusPill"><i></i><span>Feasible</span></div>
@@ -54,40 +54,42 @@
             </div>
             <div class="berth-label">BERTH 2</div>
             <div class="track track-2">
-              <div class="vessel vessel-b"><span>B</span><small>Vessel B</small></div>
+              <div class="vessel vessel-b"><span>B</span><small>Vessel B · 10:00–14:00</small></div>
+              <div class="vessel vessel-d"><span>D</span><small>Vessel D · from 15:00</small></div>
               <div class="delay-ghost"></div>
             </div>
           </div>
 
           <div class="resource-row">
-            <div class="resource r1"><span></span>Stockpile A → Vessel A</div>
-            <div class="resource r2"><span></span>Stockpile B → Vessel B</div>
-            <div class="resource r3"><span></span>Stockpile C → Vessel C</div>
+            <div class="resource r1"><span></span>Resource plan A</div>
+            <div class="resource r2"><span></span>Resource plan B</div>
+            <div class="resource r3"><span></span>Resource plan C</div>
+            <div class="resource r4"><span></span>Resource plan D</div>
           </div>
 
           <div class="impact-layer">
-            <div class="impact-chip chip-berth">Berth conflict</div>
-            <div class="impact-chip chip-sequence">Sequence disruption</div>
-            <div class="impact-chip chip-resource">Resource timing issue</div>
+            <div class="impact-chip chip-berth">B overlaps D on Berth 2</div>
+            <div class="impact-chip chip-sequence">Vessel D may need to move</div>
+            <div class="impact-chip chip-resource">Resource timing must be rechecked</div>
           </div>
 
           <div class="decision-layer">
-            <div class="decision-center">What should change?</div>
-            <div class="decision-option d1"><b>01</b><span>Absorb delay</span></div>
-            <div class="decision-option d2"><b>02</b><span>Reassign berth</span></div>
-            <div class="decision-option d3"><b>03</b><span>Resequence</span></div>
+            <div class="decision-center">How should this example be recovered?</div>
+            <div class="decision-option d1"><b>01</b><span>Hold B after D</span></div>
+            <div class="decision-option d2"><b>02</b><span>Serve B first; move D</span></div>
+            <div class="decision-option d3"><b>03</b><span>Move B to Berth 1</span></div>
           </div>
 
           <div class="engine-layer">
             <div class="input-stack">
-              <span>Terminal state</span><span>Disruption</span><span>Constraints</span><span>Priorities</span>
+              <span>Current berth plan</span><span>Vessel B: +4h delay</span><span>Berth & resource constraints</span><span>Recovery objective</span>
             </div>
             <div class="engine-core">
               <div class="engine-ring"></div>
               <div class="engine-copy"><span>OPTIMISATION</span><strong>Recovery Engine</strong><small>Searches feasible alternatives</small></div>
             </div>
             <div class="output-stack">
-              <span>Option A</span><span>Option B</span><span>Option C</span>
+              <span>Hold B</span><span>Move D</span><span>Reassign B</span>
             </div>
           </div>
 
@@ -97,65 +99,53 @@
               <div class="prompt-line"><span id="typedPrompt"></span><i class="caret"></i></div>
               <div class="chat-response" id="chatResponse">
                 <span class="thinking"><i></i><i></i><i></i></span>
-                <p>Berth 2 constraint updated. Re-evaluating feasible recovery options…</p>
+                <p>Testing Berth 1 after Vessel C finishes, subject to berth compatibility and resource constraints…</p>
               </div>
             </div>
             <div class="role-strip">
-              <div><b>AI</b><span>Ask & explain</span></div>
-              <div><b>Optimiser</b><span>Calculate & constrain</span></div>
-              <div><b>Human</b><span>Review & decide</span></div>
+              <div><b>Conversational interface</b><span>Express the what-if</span></div>
+              <div><b>Optimisation model</b><span>Test modelled constraints</span></div>
+              <div><b>Scheduler</b><span>Choose the operational response</span></div>
             </div>
           </div>
 
           <div class="options-layer">
-            <article class="option-card oa"><span class="option-kicker">OPTION A</span><h3>Absorb the delay</h3><p>Preserve the original sequence with minimal changes.</p><ul><li><b>Delay impact</b><em>High</em></li><li><b>Schedule change</b><em>Low</em></li><li><b>Resource change</b><em>Low</em></li></ul></article>
-            <article class="option-card ob"><span class="option-kicker">OPTION B</span><h3>Reassign berth</h3><p>Recover earlier with moderate operational adjustment.</p><ul><li><b>Delay impact</b><em>Medium</em></li><li><b>Schedule change</b><em>Medium</em></li><li><b>Resource change</b><em>Medium</em></li></ul></article>
-            <article class="option-card oc"><span class="option-kicker">OPTION C</span><h3>Resequence vessels</h3><p>Reduce overall disruption with a larger plan change.</p><ul><li><b>Delay impact</b><em>Low</em></li><li><b>Schedule change</b><em>High</em></li><li><b>Resource change</b><em>Medium</em></li></ul></article>
+            <article class="option-card oa"><span class="option-kicker">CANDIDATE A</span><h3>Hold Vessel B until Berth 2 clears</h3><p>Keep Vessel D in its planned position and let Vessel B wait until the berth becomes available.</p><ul><li><b>Change to Vessel D</b><em>None</em></li><li><b>Consequence for B</b><em>Additional waiting</em></li><li><b>Main assumption</b><em>B can wait</em></li></ul></article>
+            <article class="option-card ob"><span class="option-kicker">CANDIDATE B</span><h3>Serve Vessel B first and move Vessel D later</h3><p>Use Berth 2 for Vessel B from about 14:00 and shift Vessel D to a later berth window.</p><ul><li><b>Earliest B service</b><em>14:00</em></li><li><b>Consequence for D</b><em>Delayed</em></li><li><b>Main assumption</b><em>D can move</em></li></ul></article>
+            <article class="option-card oc"><span class="option-kicker">CANDIDATE C</span><h3>Move Vessel B to Berth 1 after Vessel C</h3><p>Keep Vessel D on Berth 2 and test whether Vessel B can use Berth 1 once Vessel C finishes.</p><ul><li><b>Earliest B service</b><em>About 16:00</em></li><li><b>Consequence</b><em>Berth/resource reassignment</em></li><li><b>Main assumption</b><em>Berth 1 is compatible</em></li></ul></article>
           </div>
 
           <div class="approval-layer">
             <div class="approval-card">
               <span class="approval-icon">✓</span>
-              <div><small>HUMAN APPROVAL</small><h3>Scheduler selects the recovery plan.</h3><p>PortOptimiser supports the decision. It does not replace the decision-maker.</p></div>
+              <div><small>HUMAN DECISION</small><h3>The scheduler selects the operational response.</h3><p>The optimisation model can identify plans that satisfy the constraints represented in the model. The scheduler still decides which plan is operationally acceptable.</p></div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="story__steps">
-        <section class="step" data-scene="0"><div class="step__copy"><span class="eyebrow">01 — BASELINE</span><h2>A feasible operating plan.</h2><p>Vessels, berths and resources are aligned. Nothing needs to change.</p></div></section>
-        <section class="step" data-scene="1"><div class="step__copy"><span class="eyebrow">02 — DISRUPTION</span><h2>Then Vessel B is delayed four hours.</h2><p>The ETA changes. The operating plan now has to absorb the consequences.</p></div></section>
-        <section class="step" data-scene="2"><div class="step__copy"><span class="eyebrow">03 — KNOCK-ON EFFECTS</span><h2>A disruption changes more than one time.</h2><p>Berth availability, vessel sequence and resource timing can all become coupled.</p></div></section>
-        <section class="step" data-scene="3"><div class="step__copy"><span class="eyebrow">04 — RECOVERY DECISION</span><h2>Several recovery actions may be possible.</h2><p>Each one can be feasible while creating different operational trade-offs.</p></div></section>
-        <section class="step" data-scene="4"><div class="step__copy"><span class="eyebrow">05 — OPTIMISATION</span><h2>PortOptimiser searches the recovery space.</h2><p>Current state, disruption, operational constraints and priorities are evaluated together.</p></div></section>
-        <section class="step" data-scene="5"><div class="step__copy"><span class="eyebrow">06 — CONVERSATIONAL INTERFACE</span><h2>Ask the question the way a scheduler thinks.</h2><p>The LLM helps express scenarios and explain results. The optimisation engine determines feasible alternatives.</p></div></section>
-        <section class="step" data-scene="6"><div class="step__copy"><span class="eyebrow">07 — TRADE-OFFS</span><h2>Compare options, not just answers.</h2><p>Different feasible plans can favour delay reduction, schedule stability or resource continuity differently.</p><small>Illustrative indicators only. Partner KPIs would be validated during the PoC.</small></div></section>
-        <section class="step" data-scene="7"><div class="step__copy"><span class="eyebrow">08 — HUMAN IN CONTROL</span><h2>The scheduler decides.</h2><p>AI assists. Optimisation verifies. Human judgement remains the final authority.</p></div></section>
-      </div>
-    </section>
-
-    <section class="resolution panel panel--dark">
-      <div class="resolution__inner">
-        <span class="eyebrow eyebrow--dark">FROM DISRUPTION TO RECOVERY</span>
-        <h2>One disruption.<br>One recovery story.<br><span>One scroll.</span></h2>
-        <div class="before-after">
-          <div class="mini-card mini-card--before"><small>BEFORE RECOVERY</small><div class="mini-track"><span class="m-a">A</span><span class="m-b">B +4h</span><span class="m-c">C</span></div><p>Conflict and knock-on pressure remain unresolved.</p></div>
-          <div class="mini-arrow">→</div>
-          <div class="mini-card mini-card--after"><small>AFTER SELECTED RECOVERY</small><div class="mini-track"><span class="m-a">A</span><span class="m-c moved">C</span><span class="m-b recovered">B</span></div><p>Feasible recovery option presented for scheduler approval.</p></div>
-        </div>
+        <section class="step" data-scene="0"><div class="step__copy"><span class="eyebrow">01 — EXAMPLE BASELINE</span><h2>Vessel B is planned on Berth 2 from 10:00–14:00.</h2><p>Vessel D is planned on the same berth from 15:00. This is the simplified baseline used only for this demonstration.</p></div></section>
+        <section class="step" data-scene="1"><div class="step__copy"><span class="eyebrow">02 — EXAMPLE DISRUPTION</span><h2>Vessel B is now expected four hours late.</h2><p>If its four-hour service duration is unchanged, its berth use moves to approximately 14:00–18:00.</p></div></section>
+        <section class="step" data-scene="2"><div class="step__copy"><span class="eyebrow">03 — WHY RECOVERY IS NEEDED</span><h2>The delayed plan overlaps Vessel D.</h2><p>Vessel B would still occupy Berth 2 when Vessel D is due to use it at 15:00. The scheduler therefore needs a revised plan.</p></div></section>
+        <section class="step" data-scene="3"><div class="step__copy"><span class="eyebrow">04 — CANDIDATE RECOVERY ACTIONS</span><h2>For this example, there are several sensible ways to respond.</h2><p>Hold B until D clears, prioritise B and move D later, or test whether B can move to Berth 1 after Vessel C.</p></div></section>
+        <section class="step" data-scene="4"><div class="step__copy"><span class="eyebrow">05 — OPTIMISATION ROLE</span><h2>PortOptimiser tests the recovery combinations against the modelled constraints.</h2><p>The calculation uses the current berth plan, the four-hour delay, berth and resource restrictions, and the recovery objective defined for the terminal.</p></div></section>
+        <section class="step" data-scene="5"><div class="step__copy"><span class="eyebrow">06 — CONVERSATIONAL WHAT-IF</span><h2>The scheduler can ask a specific operational question.</h2><p>For example: can Vessel B use Berth 1 after Vessel C finishes? The conversational interface passes that scenario to the optimisation model; it does not decide feasibility itself.</p></div></section>
+        <section class="step" data-scene="6"><div class="step__copy"><span class="eyebrow">07 — EXAMPLE COMPARISON</span><h2>Compare the operational consequence of each candidate.</h2><p>The useful question is not simply which option is “best”, but what changes for Vessel B, Vessel D, berth use and resource coordination under each recovery action.</p><small>All timings and candidate actions shown here are illustrative. A partner PoC would use the terminal’s actual layout, constraints and recovery priorities.</small></div></section>
+        <section class="step" data-scene="7"><div class="step__copy"><span class="eyebrow">08 — HUMAN DECISION</span><h2>The model supports the decision; the scheduler makes it.</h2><p>A candidate can satisfy the constraints represented in the model and still require operational judgement. The scheduler remains responsible for the final recovery decision.</p></div></section>
       </div>
     </section>
 
     <section class="poc panel panel--light">
       <div class="poc__inner">
-        <span class="eyebrow">WHAT THE POC TESTS</span>
-        <h2>Not a replacement for a terminal operating system.<br><span class="muted">A focused test of better recovery decision support.</span></h2>
+        <span class="eyebrow">FROM THIS EXAMPLE TO A PARTNER POC</span>
+        <h2>This page is one simplified demonstration example.<br><span class="muted">The real PoC would be configured around the partner's terminal.</span></h2>
         <div class="poc-flow">
-          <div><b>01</b><span>Represent a realistic disruption</span></div>
-          <div><b>02</b><span>Apply terminal-specific constraints</span></div>
-          <div><b>03</b><span>Generate feasible recovery options</span></div>
-          <div><b>04</b><span>Compare operational consequences</span></div>
-          <div><b>05</b><span>Support human decision-making</span></div>
+          <div><b>01</b><span>Use the partner's terminal layout and operating flow</span></div>
+          <div><b>02</b><span>Represent the berth, resource and sequencing constraints that actually matter</span></div>
+          <div><b>03</b><span>Define one representative disruption with the partner</span></div>
+          <div><b>04</b><span>Generate and compare recovery plans using partner-relevant objectives and KPIs</span></div>
+          <div><b>05</b><span>Test whether the tool helps the scheduler evaluate recovery decisions more quickly and systematically</span></div>
         </div>
       </div>
     </section>
@@ -164,7 +154,7 @@
       <div class="partner__inner">
         <span class="eyebrow">INDUSTRY VALIDATION</span>
         <h2>Does this reflect how recovery works in your operation?</h2>
-        <p class="lead">We are looking for operational insight before assuming we understand your terminal.</p>
+        <p class="lead">The purpose of the industry discussion is to replace the simplified assumptions in this example with the way recovery actually works in your terminal.</p>
         <div class="question-grid">
           <div><span>01</span><p>What happens today when the schedule is disrupted?</p></div>
           <div><span>02</span><p>Which constraints matter most in your terminal?</p></div>
@@ -172,7 +162,7 @@
           <div><span>04</span><p>Which representative scenario should the PoC test?</p></div>
         </div>
         <div class="pathway"><span>Operational discussion</span><i>→</i><span>Representative scenario</span><i>→</i><span>Constraints & KPIs</span><i>→</i><span>PoC validation</span></div>
-        <div class="disclaimer">Illustrative concept demonstration. Scenario, constraints and indicators are not based on a specific terminal and should be validated with an industry partner before use.</div>
+        <div class="disclaimer">Illustrative demonstration only. The vessel timings, berth assignments, recovery actions and constraints on this page are simplified examples and do not represent a specific terminal or validated optimisation result.</div>
       </div>
     </section>
   </main>
