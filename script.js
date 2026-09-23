@@ -109,7 +109,7 @@ function decisionScene(){
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
   gsap.fromTo('.decision-option',{y:30,opacity:0},{y:0,opacity:1,stagger:.12,duration:.5,ease:'power3.out'});
-  title.textContent='Candidate rescheduling directions';statusText.textContent='3 options';
+  title.textContent='Candidate rescheduling directions';statusText.textContent='see options';
 }
 function engineScene(){
   hideLayers();
