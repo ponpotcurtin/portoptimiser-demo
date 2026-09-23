@@ -6,7 +6,7 @@ const title = document.getElementById('sceneTitle');
 const status = document.getElementById('statusPill');
 const statusText = status.querySelector('span');
 const statusDot = status.querySelector('i');
-const promptTarget = 'Test Vessel B on Berth 1 after Vessel C finishes.';
+const promptTarget = 'I’m the scheduler. Reassign Vessel B to Berth 1 after Vessel C finishes. Keep all other vessel assignments and their reclaiming schedules unchanged.';
 let typingTimer = null;
 
 function killSceneTweens(){
