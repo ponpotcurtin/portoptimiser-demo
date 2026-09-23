@@ -12,38 +12,43 @@ let typedOnce = false;
 function hideLayers(){
   gsap.set(['.impact-layer','.decision-layer','.engine-layer','.chat-layer','.options-layer','.approval-layer'],{autoAlpha:0});
 }
+function showSchedule(){
+  gsap.set(['.timeline-head','.berth-grid'],{autoAlpha:1});
+}
 function baseScene(){
   hideLayers();
+  showSchedule();
   gsap.set('.vessel-b',{xPercent:0,background:'#f0ecff',color:'#5d41cc'});
-  gsap.set('.delay-ghost',{opacity:0});
-  gsap.set('.resource span',{background:'#34c759'});
+  gsap.set(['.delay-ghost','.conflict-window'],{opacity:0});
   title.textContent='Example baseline plan';statusText.textContent='Baseline';
   statusDot.style.background='#34c759';statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
   gsap.to(shell,{backgroundColor:'rgba(250,250,252,.92)',duration:.4});
 }
 function disruptionScene(){
   hideLayers();
+  showSchedule();
   title.textContent='Example disruption: Vessel B +4h';statusText.textContent='Conflict';
   statusDot.style.background='#ff9f0a';statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
   gsap.to('.delay-ghost',{opacity:1,duration:.3});
-  gsap.to('.vessel-b',{xPercent:68,background:'#fff1df',color:'#9a4f00',duration:.9,ease:'power3.inOut'});
+  gsap.to('.conflict-window',{opacity:1,duration:.35,delay:.45});
+  gsap.to('.vessel-b',{xPercent:100,background:'#fff1df',color:'#9a4f00',duration:.9,ease:'power3.inOut'});
 }
 function impactScene(){
   disruptionScene();
   gsap.to('.impact-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.impact-chip',{scale:.75,y:12,opacity:0},{scale:1,y:0,opacity:1,stagger:.12,duration:.45,ease:'back.out(1.6)'});
-  gsap.to('.resource span',{background:'#ff9f0a',stagger:.1,duration:.25});
   gsap.to(shell,{backgroundColor:'rgba(255,248,240,.95)',duration:.4});
   title.textContent='Berth 2 overlap: Vessel B and Vessel D';
 }
 function prepareFocusScene(){
-  gsap.set('.delay-ghost',{opacity:0});
+  gsap.set(['.delay-ghost','.conflict-window'],{opacity:0});
+  gsap.to(['.timeline-head','.berth-grid'],{autoAlpha:0,duration:.28,ease:'power2.out'});
 }
 
 function decisionScene(){
   hideLayers();
   prepareFocusScene();
-  gsap.set('.vessel-b',{xPercent:68});
+  gsap.set('.vessel-b',{xPercent:100});
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
   gsap.fromTo('.decision-option',{y:30,opacity:0},{y:0,opacity:1,stagger:.12,duration:.5,ease:'power3.out'});
@@ -95,6 +100,8 @@ if(!reduced){
   gsap.from('.hero__content',{y:36,opacity:0,duration:1.1,ease:'power3.out'});
   gsap.to('.orb-a',{yPercent:-18,xPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   gsap.to('.orb-b',{yPercent:20,xPercent:8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.port-vessel-bg',{xPercent:360,yPercent:-30,rotation:2,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+  gsap.to('.yard-grid',{yPercent:-10,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
 
   document.querySelectorAll('.step').forEach((step,i)=>{
     ScrollTrigger.create({trigger:step,start:'top 52%',end:'bottom 48%',onEnter:()=>scenes[i](),onEnterBack:()=>scenes[i]()});
