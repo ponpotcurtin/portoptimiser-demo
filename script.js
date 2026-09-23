@@ -225,29 +225,15 @@ if(!reduced){
       trigger:step,
       start:'top 56%',
       end:'bottom 44%',
-      onEnter:()=>activateScene(i),
-      onEnterBack:()=>activateScene(i),
-      onLeaveBack:()=>activateScene(Math.max(0,i-1))
+      onEnter:()=>{ if(!manualNavigation) activateScene(i); },
+      onEnterBack:()=>{ if(!manualNavigation) activateScene(i); },
+      onLeaveBack:()=>{ if(!manualNavigation) activateScene(Math.max(0,i-1)); }
     });
-  });
-
-  ScrollTrigger.create({
-    trigger:'.story',
-    start:'top top',
-    end:'bottom bottom',
-    snap:{
-      snapTo:(progress)=>{
-        const max = Math.max(1, steps.length - 1);
-        return Math.round(progress * max) / max;
-      },
-      duration:{min:.14,max:.34},
-      delay:.02,
-      ease:'power2.inOut'
-    }
   });
 
   const story = document.querySelector('.story');
   let gestureLock = false;
+  let manualNavigation = false;
   let touchStartY = null;
 
   function storyIsActive(){
@@ -263,26 +249,32 @@ if(!reduced){
     }
 
     gestureLock = true;
+    manualNavigation = true;
     gsap.killTweensOf(shell);
 
     gsap.to(shell,{
-      opacity:.44,
-      scale:.976,
-      y:direction > 0 ? -18 : 18,
-      filter:'blur(1.6px) saturate(.88)',
-      boxShadow:'0 34px 78px rgba(0,0,0,.12)',
-      duration:.16,
+      opacity:.18,
+      scale:.972,
+      y:direction > 0 ? -14 : 14,
+      filter:'blur(2px) saturate(.84)',
+      boxShadow:'0 36px 84px rgba(0,0,0,.13)',
+      duration:.15,
       ease:'power2.in',
       overwrite:true,
       onComplete:()=>{
+        const targetY = window.scrollY + steps[next].getBoundingClientRect().top;
+
+        // Reposition the invisible trigger section immediately. The shell stays
+        // faded while this happens, so Safari never shows an intermediate page.
+        window.scrollTo({top:targetY,behavior:'auto'});
+        ScrollTrigger.update();
         activateScene(next);
-        steps[next].scrollIntoView({behavior:'smooth',block:'start'});
 
         gsap.set(shell,{
-          opacity:.36,
-          scale:.978,
-          y:direction > 0 ? 24 : -24,
-          filter:'blur(1.8px) saturate(.86)'
+          opacity:.18,
+          scale:.974,
+          y:direction > 0 ? 18 : -18,
+          filter:'blur(2px) saturate(.84)'
         });
 
         gsap.to(shell,{
@@ -291,11 +283,13 @@ if(!reduced){
           y:0,
           filter:'blur(0px) saturate(1)',
           boxShadow:'0 20px 60px rgba(0,0,0,.08)',
-          duration:.38,
-          delay:.05,
+          duration:.34,
           ease:'power3.out',
           overwrite:true,
-          onComplete:()=>{gestureLock=false;}
+          onComplete:()=>{
+            manualNavigation=false;
+            gestureLock=false;
+          }
         });
       }
     });
@@ -317,12 +311,13 @@ if(!reduced){
 
   story.addEventListener('touchmove',(event)=>{
     if(!storyIsActive() || gestureLock || touchStartY === null) return;
+    event.preventDefault();
     const y = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
     const progress = Math.min(Math.abs(delta) / 120, 1);
     setShellPull(progress,direction);
-  },{passive:true});
+  },{passive:false});
 
   story.addEventListener('touchend',(event)=>{
     if(!storyIsActive() || gestureLock || touchStartY === null) return;
