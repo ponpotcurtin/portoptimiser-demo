@@ -9,6 +9,34 @@ const statusDot = status.querySelector('i');
 const promptTarget = "I'm the scheduler. Reassign Vessel B to Berth 1 after Vessel C finishes. Keep all other vessel assignments and their reclaiming schedules unchanged.";
 let typingTimer = null;
 
+const captionIndex = document.getElementById('captionIndex');
+const captionEyebrow = document.getElementById('captionEyebrow');
+const captionTitle = document.getElementById('captionTitle');
+const captionBody = document.getElementById('captionBody');
+const captionNote = document.getElementById('captionNote');
+
+const sceneCopy = Array.from(document.querySelectorAll('.step')).map((step, i) => {
+  const source = step.querySelector('.step__copy--source');
+  return {
+    index: String(i + 1).padStart(2, '0'),
+    eyebrow: source.querySelector('.eyebrow')?.textContent.replace(/^\d+\s+—\s+/, '') || '',
+    title: source.querySelector('h2')?.textContent || '',
+    body: source.querySelector('p')?.textContent || '',
+    note: source.querySelector('small')?.textContent || ''
+  };
+});
+
+function setSceneCaption(i){
+  const copy = sceneCopy[i];
+  if(!copy) return;
+  captionIndex.textContent = copy.index;
+  captionEyebrow.textContent = copy.eyebrow;
+  captionTitle.textContent = copy.title;
+  captionBody.textContent = copy.body;
+  captionNote.textContent = copy.note;
+  gsap.fromTo('#sceneCaption',{y:10,opacity:.72},{y:0,opacity:1,duration:.28,ease:'power2.out'});
+}
+
 function killSceneTweens(){
   gsap.killTweensOf([
     '.vessel-b','.delay-ghost','.conflict-window',
@@ -149,6 +177,11 @@ function approvalScene(){
 }
 const scenes=[baseScene,disruptionScene,impactScene,decisionScene,chatScene,confirmationScene,engineScene,optionsScene,approvalScene];
 
+function activateScene(i){
+  setSceneCaption(i);
+  scenes[i]();
+}
+
 if(!reduced){
   gsap.from('.hero__content',{y:36,opacity:0,duration:1.1,ease:'power3.out'});
   gsap.to('.orb-a',{yPercent:-18,xPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
@@ -156,15 +189,31 @@ if(!reduced){
   gsap.to('.port-vessel-bg',{xPercent:360,yPercent:-30,rotation:2,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
   gsap.to('.yard-grid',{yPercent:-10,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
 
-  document.querySelectorAll('.step').forEach((step,i)=>{
+  const steps = Array.from(document.querySelectorAll('.step'));
+  steps.forEach((step,i)=>{
     ScrollTrigger.create({
       trigger:step,
-      start:'top 52%',
-      end:'bottom 48%',
-      onEnter:()=>scenes[i](),
-      onEnterBack:()=>scenes[i](),
-      onLeaveBack:()=>scenes[Math.max(0,i-1)]()
+      start:'top 56%',
+      end:'bottom 44%',
+      onEnter:()=>activateScene(i),
+      onEnterBack:()=>activateScene(i),
+      onLeaveBack:()=>activateScene(Math.max(0,i-1))
     });
+  });
+
+  ScrollTrigger.create({
+    trigger:'.story',
+    start:'top top',
+    end:'bottom bottom',
+    snap:{
+      snapTo:(progress)=>{
+        const max = Math.max(1, steps.length - 1);
+        return Math.round(progress * max) / max;
+      },
+      duration:{min:.18,max:.42},
+      delay:.06,
+      ease:'power2.inOut'
+    }
   });
 
   gsap.from('.poc-flow div',{y:24,opacity:0,stagger:.09,duration:.45,scrollTrigger:{trigger:'.poc-flow',start:'top 75%'}});
@@ -172,4 +221,5 @@ if(!reduced){
   gsap.from('.about-grid article',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.about-grid',start:'top 78%'}});
   gsap.from('.about-cta',{y:20,opacity:0,duration:.55,scrollTrigger:{trigger:'.about-cta',start:'top 84%'}});
 }
+setSceneCaption(0);
 baseScene();
