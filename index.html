@@ -76,7 +76,24 @@
               <div class="vessel vessel-b"><span>B</span><small>Vessel B · 10:00–14:00</small></div>
               <div class="vessel vessel-d"><span>D</span><small>Vessel D · from 15:00</small></div>
               <div class="delay-ghost"></div>
+              <div class="delayed-start-marker"><i></i><span>14:00 start</span></div>
               <div class="conflict-window"><span>Conflict from 15:00</span></div>
+            </div>
+          </div>
+
+          <div class="dependency-row">
+            <div class="dependency-label">
+              <span>LINKED OPERATIONAL CHECKS</span>
+              <small>Illustrative interdependencies that can affect a berth rescheduling decision</small>
+            </div>
+            <div class="dependency-flow">
+              <div class="dependency-node"><b>Stockpile</b><span>Material ready?</span></div>
+              <i>→</i>
+              <div class="dependency-node"><b>Material handling</b><span>Equipment available?</span></div>
+              <i>→</i>
+              <div class="dependency-node"><b>Reclaim / transfer</b><span>Sequence preserved?</span></div>
+              <i>→</i>
+              <div class="dependency-node dependency-node--vessel"><b>Vessel / berth</b><span>Assignment feasible?</span></div>
             </div>
           </div>
 
@@ -163,6 +180,12 @@
             </div>
           </div>
 
+          <div class="scene-scroll-cue" id="sceneScrollCue" aria-hidden="true">
+            <div class="scene-scroll-cue__handle"><span></span></div>
+            <small>Swipe / scroll</small>
+            <b id="sceneProgress">1 / 9</b>
+          </div>
+
           <div class="scene-caption" id="sceneCaption">
             <div class="scene-caption__meta"><span id="captionIndex">01</span><b id="captionEyebrow">EXAMPLE BASELINE</b></div>
             <h2 id="captionTitle">Vessel B is planned on Berth 2 from 10:00–14:00.</h2>
@@ -224,6 +247,11 @@
             <span>PROJECT LEAD</span>
             <h3>Ponpot Jartnillaphand</h3>
             <p>Research Associate, Curtin Centre for Optimisation and Decision Science.</p>
+          </article>
+          <article>
+            <span>PROJECT INVESTIGATOR</span>
+            <h3>Dr Hoa Bui</h3>
+            <p>Senior Lecturer, Curtin Centre for Optimisation and Decision Science.</p>
           </article>
           <article>
             <span>EXPERTISE</span>
