@@ -116,6 +116,30 @@
             </div>
           </div>
 
+          <div class="confirm-layer">
+            <div class="confirm-card">
+              <div class="confirm-head">
+                <div>
+                  <span class="confirm-kicker">INTERPRETED CHANGES</span>
+                  <h3>Review before recomputation</h3>
+                </div>
+                <span class="confirm-status">Awaiting scheduler confirmation</span>
+              </div>
+              <div class="confirm-list">
+                <div><span>Vessel B berth</span><b>Berth 1</b></div>
+                <div><span>Start condition</span><b>After Vessel C finishes</b></div>
+                <div><span>Other vessel assignments</span><b>Keep unchanged</b></div>
+                <div><span>Other reclaiming schedules</span><b>Keep unchanged</b></div>
+              </div>
+              <div class="confirm-note">No schedule change is sent to the optimisation model until the scheduler confirms the interpretation.</div>
+              <div class="confirm-actions">
+                <span class="confirm-button confirm-button--secondary">Revise instruction</span>
+                <span class="confirm-button confirm-button--primary">Confirm changes</span>
+              </div>
+              <small>If the interpretation is not correct, the scheduler revises the instruction before recomputation.</small>
+            </div>
+          </div>
+
           <div class="options-layer">
             <article class="option-card oa"><span class="option-kicker">CANDIDATE A</span><h3>Hold Vessel B until Berth 2 clears</h3><p>Keep Vessel D in its planned position and let Vessel B wait until the berth becomes available.</p><ul><li><b>Change to Vessel D</b><em>None</em></li><li><b>Consequence for B</b><em>Additional waiting</em></li><li><b>Main assumption</b><em>B can wait</em></li></ul></article>
             <article class="option-card ob"><span class="option-kicker">CANDIDATE B</span><h3>Serve Vessel B first and move Vessel D later</h3><p>Use Berth 2 for Vessel B from about 14:00 and shift Vessel D to a later berth window.</p><ul><li><b>Earliest B service</b><em>14:00</em></li><li><b>Consequence for D</b><em>Delayed</em></li><li><b>Main assumption</b><em>D can move</em></li></ul></article>
@@ -136,10 +160,11 @@
         <section class="step" data-scene="1"><div class="step__copy"><span class="eyebrow">02 — EXAMPLE DISRUPTION</span><h2>Vessel B is now expected four hours late.</h2><p>If its four-hour service duration is unchanged, its berth use moves to approximately 14:00–18:00.</p></div></section>
         <section class="step" data-scene="2"><div class="step__copy"><span class="eyebrow">03 — RESCHEDULING REQUIRED</span><h2>The delayed berth schedule conflicts with Vessel D.</h2><p>With Vessel B shifted to approximately 14:00–18:00, Berth 2 is double-booked from 15:00. A revised berth schedule is required.</p></div></section>
         <section class="step" data-scene="3"><div class="step__copy"><span class="eyebrow">04 — CANDIDATE REVISED SCHEDULES</span><h2>Three revised berth schedules are tested.</h2><p>Hold B until D clears, prioritise B and delay D, or move B to Berth 1 after Vessel C.</p></div></section>
-        <section class="step" data-scene="4"><div class="step__copy"><span class="eyebrow">05 — RECOMPUTE THE SCHEDULE</span><h2>PortOptimiser recomputes candidate revised berth schedules.</h2><p>It uses the current berth schedule, the disruption, and the modelled terminal constraints to evaluate feasible revised schedules for scheduler review.</p></div></section>
-        <section class="step" data-scene="5"><div class="step__copy"><span class="eyebrow">06 — ADD OPERATIONAL CONTEXT</span><h2>The scheduler can refine the rescheduling task.</h2><p>The scheduler can add operational knowledge or a scenario instruction in natural language. The conversational interface interprets it; the optimisation model then recomputes the revised schedules.</p></div></section>
-        <section class="step" data-scene="6"><div class="step__copy"><span class="eyebrow">07 — COMPARE REVISED SCHEDULES</span><h2>Compare the revised schedules.</h2><p>Review what changes for Vessel B, Vessel D and berth use under each candidate revised schedule.</p><small>All timings and candidate schedules shown here are illustrative. A partner PoC would use the terminal’s actual layout, constraints and rescheduling priorities.</small></div></section>
-        <section class="step" data-scene="7"><div class="step__copy"><span class="eyebrow">08 — HUMAN DECISION</span><h2>The model supports the rescheduling decision; the scheduler makes it.</h2><p>PortOptimiser identifies revised schedules that satisfy the represented constraints. The scheduler remains responsible for selecting the operational response.</p></div></section>
+        <section class="step" data-scene="4"><div class="step__copy"><span class="eyebrow">05 — ADD OPERATIONAL CONTEXT</span><h2>The scheduler can refine the rescheduling task.</h2><p>The scheduler adds operational knowledge or a rescheduling instruction in natural language. The conversational interface translates that instruction into explicit schedule changes.</p></div></section>
+        <section class="step" data-scene="5"><div class="step__copy"><span class="eyebrow">06 — CONFIRM INTERPRETATION</span><h2>The scheduler confirms what PortOptimiser understood.</h2><p>The interpreted berth, timing and “keep unchanged” requirements are shown explicitly before any revised schedule is recomputed.</p></div></section>
+        <section class="step" data-scene="6"><div class="step__copy"><span class="eyebrow">07 — RECOMPUTE THE SCHEDULE</span><h2>After confirmation, PortOptimiser recomputes candidate revised berth schedules.</h2><p>The optimisation model applies the confirmed instruction together with the current schedule and modelled terminal constraints.</p></div></section>
+        <section class="step" data-scene="7"><div class="step__copy"><span class="eyebrow">08 — COMPARE REVISED SCHEDULES</span><h2>Compare the revised schedules.</h2><p>Review what changes for Vessel B, Vessel D and berth use under each candidate revised schedule.</p><small>All timings and candidate schedules shown here are illustrative. A partner PoC would use the terminal’s actual layout, constraints and rescheduling priorities.</small></div></section>
+        <section class="step" data-scene="8"><div class="step__copy"><span class="eyebrow">09 — HUMAN DECISION</span><h2>The model supports the rescheduling decision; the scheduler makes it.</h2><p>PortOptimiser identifies revised schedules that satisfy the represented constraints. The scheduler remains responsible for selecting the operational response.</p></div></section>
       </div>
     </section>
 
