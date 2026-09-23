@@ -241,6 +241,11 @@ if(!reduced){
     return rect.top <= 60 && rect.bottom >= window.innerHeight * .65;
   }
 
+  function isStoryBoundaryExit(direction){
+    return (direction > 0 && activeScene === steps.length - 1) ||
+           (direction < 0 && activeScene === 0);
+  }
+
   function goToScene(index, direction=1){
     const next = Math.max(0, Math.min(index, steps.length - 1));
     if(next === activeScene || !steps[next]){
@@ -297,8 +302,16 @@ if(!reduced){
 
   window.addEventListener('wheel',(event)=>{
     if(!storyIsActive() || gestureLock || Math.abs(event.deltaY) < 14) return;
-    event.preventDefault();
     const direction = event.deltaY > 0 ? 1 : -1;
+
+    // At the first/last story scene, release the gesture back to the browser
+    // so the user can continue naturally to the hero or the sections below.
+    if(isStoryBoundaryExit(direction)){
+      restoreShell();
+      return;
+    }
+
+    event.preventDefault();
     setShellPull(.72,direction);
     goToScene(activeScene + direction,direction);
   },{passive:false});
@@ -311,10 +324,18 @@ if(!reduced){
 
   story.addEventListener('touchmove',(event)=>{
     if(!storyIsActive() || gestureLock || touchStartY === null) return;
-    event.preventDefault();
     const y = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
+
+    // Do not trap the user's swipe at the beginning or end of the 9-scene story.
+    // Allow Safari to take over and continue down to the PoC/industry sections.
+    if(isStoryBoundaryExit(direction)){
+      restoreShell();
+      return;
+    }
+
+    event.preventDefault();
     const progress = Math.min(Math.abs(delta) / 120, 1);
     setShellPull(progress,direction);
   },{passive:false});
@@ -331,6 +352,12 @@ if(!reduced){
     }
 
     const direction = delta > 0 ? 1 : -1;
+
+    if(isStoryBoundaryExit(direction)){
+      restoreShell();
+      return;
+    }
+
     goToScene(activeScene + direction,direction);
   },{passive:true});
 
