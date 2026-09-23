@@ -6,7 +6,7 @@ const title = document.getElementById('sceneTitle');
 const status = document.getElementById('statusPill');
 const statusText = status.querySelector('span');
 const statusDot = status.querySelector('i');
-const promptTarget = 'Test Vessel B on Berth 1 after Vessel C finishes.';
+const promptTarget = "I'm the scheduler. Reassign Vessel B to Berth 1 after Vessel C finishes. Keep all other vessel assignments and their reclaiming schedules unchanged.";
 let typingTimer = null;
 
 function killSceneTweens(){
@@ -16,11 +16,12 @@ function killSceneTweens(){
     '.decision-layer','.decision-center','.decision-option',
     '.engine-layer','.input-stack span','.output-stack span','.engine-core',
     '.chat-layer','.chat-card','.role-strip div','#chatResponse',
+    '.confirm-layer','.confirm-card','.confirm-list div','.confirm-button',
     '.options-layer','.option-card','.approval-layer','.approval-card','.approval-icon'
   ]);
 }
 function hideLayers(){
-  gsap.set(['.decision-layer','.engine-layer','.chat-layer','.options-layer','.approval-layer'],{autoAlpha:0});
+  gsap.set(['.decision-layer','.engine-layer','.chat-layer','.confirm-layer','.options-layer','.approval-layer'],{autoAlpha:0});
 }
 function resetTransientState(){
   killSceneTweens();
@@ -31,6 +32,8 @@ function resetTransientState(){
   gsap.set('.vessel-b',{xPercent:0,background:'#f0ecff',color:'#5d41cc'});
   gsap.set('.decision-option',{y:0,opacity:1});
   gsap.set('.option-card',{y:30,opacity:0,scale:1});
+  gsap.set('.confirm-list div',{x:0,opacity:1});
+  gsap.set('.confirm-button',{y:0,opacity:1,boxShadow:'none'});
   gsap.set('#chatResponse',{opacity:0});
 }
 function showSchedule(){
@@ -87,7 +90,7 @@ function engineScene(){
   gsap.fromTo('.output-stack span',{x:20,opacity:0},{x:0,opacity:1,stagger:.1,delay:.45,duration:.4});
   gsap.fromTo('.engine-core',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.3)'});
   gsap.to('.engine-ring',{rotation:360,duration:8,ease:'none',repeat:-1});
-  title.textContent='Recompute revised berth schedules';statusText.textContent='Rescheduling';
+  title.textContent='Confirmed changes → recompute revised schedules';statusText.textContent='Rescheduling';
 }
 function typePrompt(){
   if(typingTimer) clearTimeout(typingTimer);
@@ -113,6 +116,19 @@ function chatScene(){
   gsap.fromTo('.role-strip div',{y:15,opacity:0},{y:0,opacity:1,stagger:.08,delay:.35,duration:.35});
   title.textContent='Add operational context to the rescheduling task';statusText.textContent='Refine';
 }
+function confirmationScene(){
+  hideLayers();
+  prepareFocusScene();
+  gsap.to('.confirm-layer',{autoAlpha:1,duration:.22});
+  gsap.fromTo('.confirm-card',{y:24,scale:.975,opacity:0},{y:0,scale:1,opacity:1,duration:.5,ease:'power3.out'});
+  gsap.fromTo('.confirm-list div',{x:-16,opacity:0},{x:0,opacity:1,stagger:.08,delay:.16,duration:.35,ease:'power2.out'});
+  gsap.fromTo('.confirm-button',{y:10,opacity:0},{y:0,opacity:1,stagger:.08,delay:.42,duration:.3});
+  gsap.fromTo('.confirm-button--primary',{boxShadow:'0 0 0 rgba(0,113,227,0)'},{boxShadow:'0 0 0 7px rgba(0,113,227,.10)',duration:.65,yoyo:true,repeat:1,delay:.72});
+  title.textContent='Review interpreted changes before recomputation';
+  statusText.textContent='Confirm';
+  statusDot.style.background='#ff9f0a';
+  statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
+}
 function optionsScene(){
   hideLayers();
   prepareFocusScene();
@@ -130,7 +146,7 @@ function approvalScene(){
   title.textContent='Scheduler selects the revised schedule';statusText.textContent='Human decision';
   statusDot.style.background='#34c759';
 }
-const scenes=[baseScene,disruptionScene,impactScene,decisionScene,engineScene,chatScene,optionsScene,approvalScene];
+const scenes=[baseScene,disruptionScene,impactScene,decisionScene,chatScene,confirmationScene,engineScene,optionsScene,approvalScene];
 
 if(!reduced){
   gsap.from('.hero__content',{y:36,opacity:0,duration:1.1,ease:'power3.out'});
