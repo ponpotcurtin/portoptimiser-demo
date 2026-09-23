@@ -17,7 +17,8 @@ function killSceneTweens(){
     '.engine-layer','.input-stack span','.output-stack span','.engine-core',
     '.chat-layer','.chat-card','.role-strip div','#chatResponse',
     '.confirm-layer','.confirm-card','.confirm-list div','.confirm-button',
-    '.options-layer','.option-card','.approval-layer','.approval-card','.approval-icon'
+    '.options-layer','.result-card','.result-grid div',
+    '.approval-layer','.approval-card','.approval-icon'
   ]);
 }
 function hideLayers(){
@@ -31,7 +32,7 @@ function resetTransientState(){
   gsap.set('.conflict-window',{opacity:0});
   gsap.set('.vessel-b',{xPercent:0,background:'#f0ecff',color:'#5d41cc'});
   gsap.set('.decision-option',{y:0,opacity:1});
-  gsap.set('.option-card',{y:30,opacity:0,scale:1});
+  gsap.set('.result-card',{y:30,opacity:0,scale:1});
   gsap.set('.confirm-list div',{x:0,opacity:1});
   gsap.set('.confirm-button',{y:0,opacity:1,boxShadow:'none'});
   gsap.set('#chatResponse',{opacity:0});
@@ -80,7 +81,7 @@ function decisionScene(){
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
   gsap.fromTo('.decision-option',{y:30,opacity:0},{y:0,opacity:1,stagger:.12,duration:.5,ease:'power3.out'});
-  title.textContent='Candidate revised berth schedules';statusText.textContent='3 candidates';
+  title.textContent='Candidate rescheduling directions';statusText.textContent='3 options';
 }
 function engineScene(){
   hideLayers();
@@ -133,9 +134,9 @@ function optionsScene(){
   hideLayers();
   prepareFocusScene();
   gsap.to('.options-layer',{autoAlpha:1,duration:.2});
-  gsap.to('.option-card',{y:0,opacity:1,stagger:.12,duration:.55,ease:'power3.out'});
-  gsap.fromTo('.ob',{scale:1},{scale:1.035,duration:.45,yoyo:true,repeat:1,delay:.6});
-  title.textContent='Compare candidate revised schedules';statusText.textContent='Compare';
+  gsap.fromTo('.result-card',{y:30,opacity:0,scale:.985},{y:0,opacity:1,scale:1,duration:.55,ease:'power3.out'});
+  gsap.fromTo('.result-grid div',{y:10,opacity:0},{y:0,opacity:1,stagger:.08,delay:.18,duration:.35,ease:'power2.out'});
+  title.textContent='Review recomputed schedule';statusText.textContent='Review';
 }
 function approvalScene(){
   hideLayers();
@@ -168,5 +169,7 @@ if(!reduced){
 
   gsap.from('.poc-flow div',{y:24,opacity:0,stagger:.09,duration:.45,scrollTrigger:{trigger:'.poc-flow',start:'top 75%'}});
   gsap.from('.question-grid div',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.question-grid',start:'top 78%'}});
+  gsap.from('.about-grid article',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.about-grid',start:'top 78%'}});
+  gsap.from('.about-cta',{y:20,opacity:0,duration:.55,scrollTrigger:{trigger:'.about-cta',start:'top 84%'}});
 }
 baseScene();
