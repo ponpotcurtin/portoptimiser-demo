@@ -6,7 +6,7 @@ const title = document.getElementById('sceneTitle');
 const status = document.getElementById('statusPill');
 const statusText = status.querySelector('span');
 const statusDot = status.querySelector('i');
-const promptTarget = 'What if Berth 2 is unavailable for the next six hours?';
+const promptTarget = 'Can Vessel B use Berth 1 after Vessel C finishes?';
 let typedOnce = false;
 
 function hideLayers(){
@@ -17,13 +17,13 @@ function baseScene(){
   gsap.set('.vessel-b',{xPercent:0,background:'#f0ecff',color:'#5d41cc'});
   gsap.set('.delay-ghost',{opacity:0});
   gsap.set('.resource span',{background:'#34c759'});
-  title.textContent='Original operating plan';statusText.textContent='Feasible';
+  title.textContent='Example baseline plan';statusText.textContent='Baseline';
   statusDot.style.background='#34c759';statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
   gsap.to(shell,{backgroundColor:'rgba(250,250,252,.92)',duration:.4});
 }
 function disruptionScene(){
   hideLayers();
-  title.textContent='Vessel B delayed +4h';statusText.textContent='Disrupted';
+  title.textContent='Example disruption: Vessel B +4h';statusText.textContent='Conflict';
   statusDot.style.background='#ff9f0a';statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
   gsap.to('.delay-ghost',{opacity:1,duration:.3});
   gsap.to('.vessel-b',{xPercent:68,background:'#fff1df',color:'#9a4f00',duration:.9,ease:'power3.inOut'});
@@ -34,7 +34,7 @@ function impactScene(){
   gsap.fromTo('.impact-chip',{scale:.75,y:12,opacity:0},{scale:1,y:0,opacity:1,stagger:.12,duration:.45,ease:'back.out(1.6)'});
   gsap.to('.resource span',{background:'#ff9f0a',stagger:.1,duration:.25});
   gsap.to(shell,{backgroundColor:'rgba(255,248,240,.95)',duration:.4});
-  title.textContent='Knock-on effects emerge';
+  title.textContent='Berth 2 overlap: Vessel B and Vessel D';
 }
 function prepareFocusScene(){
   gsap.set('.delay-ghost',{opacity:0});
@@ -47,7 +47,7 @@ function decisionScene(){
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
   gsap.fromTo('.decision-option',{y:30,opacity:0},{y:0,opacity:1,stagger:.12,duration:.5,ease:'power3.out'});
-  title.textContent='Recovery decision space';statusText.textContent='Evaluate';
+  title.textContent='Candidate recovery actions';statusText.textContent='Compare';
 }
 function engineScene(){
   hideLayers();
@@ -57,7 +57,7 @@ function engineScene(){
   gsap.fromTo('.output-stack span',{x:20,opacity:0},{x:0,opacity:1,stagger:.1,delay:.45,duration:.4});
   gsap.fromTo('.engine-core',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.3)'});
   gsap.to('.engine-ring',{rotation:360,duration:8,ease:'none',repeat:-1});
-  title.textContent='PortOptimiser recovery engine';statusText.textContent='Optimising';
+  title.textContent='Test candidate plans against constraints';statusText.textContent='Calculating';
 }
 function typePrompt(){
   if(typedOnce) return; typedOnce=true;
@@ -70,7 +70,7 @@ function chatScene(){
   gsap.to('.chat-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.chat-card',{y:28,scale:.97,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'power3.out',onComplete:typePrompt});
   gsap.fromTo('.role-strip div',{y:15,opacity:0},{y:0,opacity:1,stagger:.08,delay:.35,duration:.35});
-  title.textContent='Conversational scenario exploration';statusText.textContent='Human-led';
+  title.textContent='Scheduler what-if: Berth 1 after Vessel C';statusText.textContent='What-if';
 }
 function optionsScene(){
   hideLayers();
@@ -78,7 +78,7 @@ function optionsScene(){
   gsap.to('.options-layer',{autoAlpha:1,duration:.2});
   gsap.to('.option-card',{y:0,opacity:1,stagger:.12,duration:.55,ease:'power3.out'});
   gsap.fromTo('.ob',{scale:1},{scale:1.035,duration:.45,yoyo:true,repeat:1,delay:.6});
-  title.textContent='Compare recovery trade-offs';statusText.textContent='3 options';
+  title.textContent='Illustrative comparison of three candidates';statusText.textContent='3 candidates';
 }
 function approvalScene(){
   hideLayers();
@@ -86,7 +86,7 @@ function approvalScene(){
   gsap.to('.approval-layer',{autoAlpha:1,duration:.2});
   gsap.fromTo('.approval-card',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.5)'});
   gsap.fromTo('.approval-icon',{scale:.4,rotation:-18},{scale:1,rotation:0,duration:.5,delay:.25,ease:'back.out(2)'});
-  title.textContent='Human approval';statusText.textContent='Scheduler decides';
+  title.textContent='Scheduler selects the operational response';statusText.textContent='Human decision';
   statusDot.style.background='#34c759';
 }
 const scenes=[baseScene,disruptionScene,impactScene,decisionScene,engineScene,chatScene,optionsScene,approvalScene];
