@@ -83,7 +83,7 @@
 
           <div class="dependency-row">
             <div class="dependency-label">
-              <span>LINKED OPERATIONAL CHECKS</span>
+              <span>EXAMPLES OF OPERATIONAL INTERDEPENDENCIES</span>
               <small>Illustrative interdependencies that can affect a berth rescheduling decision</small>
             </div>
             <div class="dependency-flow">
@@ -202,7 +202,7 @@
         <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — CANDIDATE DIRECTIONS</span><h2>Three rescheduling directions are considered.</h2><p>Hold B until D clears, prioritise B and delay D, or move B to Berth 1 after Vessel C.</p></div></section>
         <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — ADD OPERATIONAL CONTEXT</span><h2>The scheduler can refine the rescheduling task.</h2><p>The scheduler adds operational knowledge or a rescheduling instruction in natural language. The conversational interface translates that instruction into explicit schedule changes.</p></div></section>
         <section class="step" data-scene="5"><div class="step__copy step__copy--source"><span class="eyebrow">06 — CONFIRM INTERPRETATION</span><h2>The scheduler confirms what PortOptimiser understood.</h2><p>The interpreted berth, timing and “keep unchanged” requirements are shown explicitly before any revised schedule is recomputed.</p></div></section>
-        <section class="step" data-scene="6"><div class="step__copy step__copy--source"><span class="eyebrow">07 — RECOMPUTE THE SCHEDULE</span><h2>After confirmation, PortOptimiser recomputes candidate revised berth schedules.</h2><p>The optimisation model applies the confirmed instruction together with the current schedule and modelled terminal constraints.</p></div></section>
+        <section class="step" data-scene="6"><div class="step__copy step__copy--source"><span class="eyebrow">07 — RECOMPUTE THE SCHEDULE</span><h2>After confirmation, PortOptimiser recomputes the revised schedule.</h2><p>The optimisation model applies the confirmed instruction together with the current schedule and the constraints represented in the model.</p></div></section>
         <section class="step" data-scene="7"><div class="step__copy step__copy--source"><span class="eyebrow">08 — REVIEW THE RESULT</span><h2>Review the recomputed schedule.</h2><p>Check that Vessel B has moved as instructed and that the assignments and reclaiming schedules requested to remain unchanged are preserved.</p><small>This is an illustrative result. A partner PoC would use the terminal’s actual data, constraints and rescheduling priorities.</small></div></section>
         <section class="step" data-scene="8"><div class="step__copy step__copy--source"><span class="eyebrow">09 — HUMAN DECISION</span><h2>The model supports the rescheduling decision; the scheduler makes it.</h2><p>PortOptimiser identifies revised schedules that satisfy the represented constraints. The scheduler remains responsible for selecting the operational response.</p></div></section>
       </div>
