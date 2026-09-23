@@ -193,6 +193,25 @@ function activateScene(i){
   scenes[activeScene]();
 }
 
+function setShellPull(progress, direction=1){
+  const p = Math.max(0, Math.min(progress, 1));
+  gsap.set(shell,{
+    opacity:1 - (0.48 * p),
+    scale:1 - (0.022 * p),
+    y:(direction > 0 ? -16 : 16) * p,
+    filter:`blur(${1.4 * p}px) saturate(${1 - 0.12 * p})`,
+    boxShadow:`0 ${20 + 12*p}px ${60 + 18*p}px rgba(0,0,0,${0.08 + 0.04*p})`
+  });
+}
+
+function restoreShell(){
+  gsap.to(shell,{
+    opacity:1,scale:1,y:0,filter:'blur(0px) saturate(1)',
+    boxShadow:'0 20px 60px rgba(0,0,0,.08)',
+    duration:.28,ease:'power2.out',overwrite:true
+  });
+}
+
 if(!reduced){
   gsap.from('.hero__content',{y:36,opacity:0,duration:1.1,ease:'power3.out'});
   gsap.to('.orb-a',{yPercent:-18,xPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
@@ -236,23 +255,73 @@ if(!reduced){
     return rect.top <= 60 && rect.bottom >= window.innerHeight * .65;
   }
 
-  function goToScene(index){
+  function goToScene(index, direction=1){
     const next = Math.max(0, Math.min(index, steps.length - 1));
-    if(next === activeScene || !steps[next]) return;
+    if(next === activeScene || !steps[next]){
+      restoreShell();
+      return;
+    }
+
     gestureLock = true;
-    activateScene(next);
-    steps[next].scrollIntoView({behavior:'smooth',block:'start'});
-    window.setTimeout(()=>{gestureLock=false;},520);
+    gsap.killTweensOf(shell);
+
+    gsap.to(shell,{
+      opacity:.44,
+      scale:.976,
+      y:direction > 0 ? -18 : 18,
+      filter:'blur(1.6px) saturate(.88)',
+      boxShadow:'0 34px 78px rgba(0,0,0,.12)',
+      duration:.16,
+      ease:'power2.in',
+      overwrite:true,
+      onComplete:()=>{
+        activateScene(next);
+        steps[next].scrollIntoView({behavior:'smooth',block:'start'});
+
+        gsap.set(shell,{
+          opacity:.36,
+          scale:.978,
+          y:direction > 0 ? 24 : -24,
+          filter:'blur(1.8px) saturate(.86)'
+        });
+
+        gsap.to(shell,{
+          opacity:1,
+          scale:1,
+          y:0,
+          filter:'blur(0px) saturate(1)',
+          boxShadow:'0 20px 60px rgba(0,0,0,.08)',
+          duration:.38,
+          delay:.05,
+          ease:'power3.out',
+          overwrite:true,
+          onComplete:()=>{gestureLock=false;}
+        });
+      }
+    });
   }
 
   window.addEventListener('wheel',(event)=>{
     if(!storyIsActive() || gestureLock || Math.abs(event.deltaY) < 14) return;
     event.preventDefault();
-    goToScene(activeScene + (event.deltaY > 0 ? 1 : -1));
+    const direction = event.deltaY > 0 ? 1 : -1;
+    setShellPull(.72,direction);
+    goToScene(activeScene + direction,direction);
   },{passive:false});
 
   story.addEventListener('touchstart',(event)=>{
+    if(!storyIsActive() || gestureLock) return;
     touchStartY = event.changedTouches[0]?.clientY ?? null;
+    gsap.killTweensOf(shell);
+  },{passive:true});
+
+  story.addEventListener('touchmove',(event)=>{
+    if(!storyIsActive() || gestureLock || touchStartY === null) return;
+    const y = event.changedTouches[0]?.clientY ?? touchStartY;
+    const delta = touchStartY - y;
+    const direction = delta >= 0 ? 1 : -1;
+    const progress = Math.min(Math.abs(delta) / 120, 1);
+    setShellPull(progress,direction);
   },{passive:true});
 
   story.addEventListener('touchend',(event)=>{
@@ -260,8 +329,19 @@ if(!reduced){
     const endY = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - endY;
     touchStartY = null;
-    if(Math.abs(delta) < 38) return;
-    goToScene(activeScene + (delta > 0 ? 1 : -1));
+
+    if(Math.abs(delta) < 38){
+      restoreShell();
+      return;
+    }
+
+    const direction = delta > 0 ? 1 : -1;
+    goToScene(activeScene + direction,direction);
+  },{passive:true});
+
+  story.addEventListener('touchcancel',()=>{
+    touchStartY = null;
+    restoreShell();
   },{passive:true});
 
   gsap.from('.poc-flow div',{y:24,opacity:0,stagger:.09,duration:.45,scrollTrigger:{trigger:'.poc-flow',start:'top 75%'}});
