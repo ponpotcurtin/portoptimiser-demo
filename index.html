@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="PortOptimiser — an illustrative scroll-driven proof-of-concept for port schedule disruption recovery." />
+  <title>PortOptimiser — Disruption to Recovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="PortOptimiser home">PortOptimiser</a>
+      <span class="nav__meta">Illustrative PoC</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero panel panel--light">
+      <div class="hero__content reveal">
+        <span class="eyebrow">PORT SCHEDULE RECOVERY</span>
+        <h1>When the plan moves,<br><span class="gradient-text">recovery should move with it.</span></h1>
+        <p class="lead">A scroll-driven concept demonstration of how PortOptimiser could help schedulers explore feasible recovery options after a disruption.</p>
+        <div class="scroll-cue" aria-hidden="true"><span></span><small>Scroll to begin</small></div>
+      </div>
+      <div class="hero__orb orb-a"></div>
+      <div class="hero__orb orb-b"></div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="story__visual" aria-hidden="true">
+        <div class="terminal-shell">
+          <div class="terminal-topline">
+            <div>
+              <span class="micro">LIVE SCENARIO</span>
+              <strong id="sceneTitle">Original operating plan</strong>
+            </div>
+            <div class="status-pill" id="statusPill"><i></i><span>Feasible</span></div>
+          </div>
+
+          <div class="timeline-head">
+            <span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span>
+          </div>
+
+          <div class="berth-grid">
+            <div class="berth-label">BERTH 1</div>
+            <div class="track track-1">
+              <div class="vessel vessel-a"><span>A</span><small>Vessel A</small></div>
+              <div class="vessel vessel-c"><span>C</span><small>Vessel C</small></div>
+            </div>
+            <div class="berth-label">BERTH 2</div>
+            <div class="track track-2">
+              <div class="vessel vessel-b"><span>B</span><small>Vessel B</small></div>
+              <div class="delay-ghost"></div>
+            </div>
+          </div>
+
+          <div class="resource-row">
+            <div class="resource r1"><span></span>Stockpile A → Vessel A</div>
+            <div class="resource r2"><span></span>Stockpile B → Vessel B</div>
+            <div class="resource r3"><span></span>Stockpile C → Vessel C</div>
+          </div>
+
+          <div class="impact-layer">
+            <div class="impact-chip chip-berth">Berth conflict</div>
+            <div class="impact-chip chip-sequence">Sequence disruption</div>
+            <div class="impact-chip chip-resource">Resource timing issue</div>
+          </div>
+
+          <div class="decision-layer">
+            <div class="decision-center">What should change?</div>
+            <div class="decision-option d1"><b>01</b><span>Absorb delay</span></div>
+            <div class="decision-option d2"><b>02</b><span>Reassign berth</span></div>
+            <div class="decision-option d3"><b>03</b><span>Resequence</span></div>
+          </div>
+
+          <div class="engine-layer">
+            <div class="input-stack">
+              <span>Terminal state</span><span>Disruption</span><span>Constraints</span><span>Priorities</span>
+            </div>
+            <div class="engine-core">
+              <div class="engine-ring"></div>
+              <div class="engine-copy"><span>OPTIMISATION</span><strong>Recovery Engine</strong><small>Searches feasible alternatives</small></div>
+            </div>
+            <div class="output-stack">
+              <span>Option A</span><span>Option B</span><span>Option C</span>
+            </div>
+          </div>
+
+          <div class="chat-layer">
+            <div class="chat-card">
+              <div class="chat-head"><span class="avatar">S</span><div><b>Scheduler</b><small>Scenario query</small></div></div>
+              <div class="prompt-line"><span id="typedPrompt"></span><i class="caret"></i></div>
+              <div class="chat-response" id="chatResponse">
+                <span class="thinking"><i></i><i></i><i></i></span>
+                <p>Berth 2 constraint updated. Re-evaluating feasible recovery options…</p>
+              </div>
+            </div>
+            <div class="role-strip">
+              <div><b>AI</b><span>Ask & explain</span></div>
+              <div><b>Optimiser</b><span>Calculate & constrain</span></div>
+              <div><b>Human</b><span>Review & decide</span></div>
+            </div>
+          </div>
+
+          <div class="options-layer">
+            <article class="option-card oa"><span class="option-kicker">OPTION A</span><h3>Absorb the delay</h3><p>Preserve the original sequence with minimal changes.</p><ul><li><b>Delay impact</b><em>High</em></li><li><b>Schedule change</b><em>Low</em></li><li><b>Resource change</b><em>Low</em></li></ul></article>
+            <article class="option-card ob"><span class="option-kicker">OPTION B</span><h3>Reassign berth</h3><p>Recover earlier with moderate operational adjustment.</p><ul><li><b>Delay impact</b><em>Medium</em></li><li><b>Schedule change</b><em>Medium</em></li><li><b>Resource change</b><em>Medium</em></li></ul></article>
+            <article class="option-card oc"><span class="option-kicker">OPTION C</span><h3>Resequence vessels</h3><p>Reduce overall disruption with a larger plan change.</p><ul><li><b>Delay impact</b><em>Low</em></li><li><b>Schedule change</b><em>High</em></li><li><b>Resource change</b><em>Medium</em></li></ul></article>
+          </div>
+
+          <div class="approval-layer">
+            <div class="approval-card">
+              <span class="approval-icon">✓</span>
+              <div><small>HUMAN APPROVAL</small><h3>Scheduler selects the recovery plan.</h3><p>PortOptimiser supports the decision. It does not replace the decision-maker.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story__steps">
+        <section class="step" data-scene="0"><div class="step__copy"><span class="eyebrow">01 — BASELINE</span><h2>A feasible operating plan.</h2><p>Vessels, berths and resources are aligned. Nothing needs to change.</p></div></section>
+        <section class="step" data-scene="1"><div class="step__copy"><span class="eyebrow">02 — DISRUPTION</span><h2>Then Vessel B is delayed four hours.</h2><p>The ETA changes. The operating plan now has to absorb the consequences.</p></div></section>
+        <section class="step" data-scene="2"><div class="step__copy"><span class="eyebrow">03 — KNOCK-ON EFFECTS</span><h2>A disruption changes more than one time.</h2><p>Berth availability, vessel sequence and resource timing can all become coupled.</p></div></section>
+        <section class="step" data-scene="3"><div class="step__copy"><span class="eyebrow">04 — RECOVERY DECISION</span><h2>Several recovery actions may be possible.</h2><p>Each one can be feasible while creating different operational trade-offs.</p></div></section>
+        <section class="step" data-scene="4"><div class="step__copy"><span class="eyebrow">05 — OPTIMISATION</span><h2>PortOptimiser searches the recovery space.</h2><p>Current state, disruption, operational constraints and priorities are evaluated together.</p></div></section>
+        <section class="step" data-scene="5"><div class="step__copy"><span class="eyebrow">06 — CONVERSATIONAL INTERFACE</span><h2>Ask the question the way a scheduler thinks.</h2><p>The LLM helps express scenarios and explain results. The optimisation engine determines feasible alternatives.</p></div></section>
+        <section class="step" data-scene="6"><div class="step__copy"><span class="eyebrow">07 — TRADE-OFFS</span><h2>Compare options, not just answers.</h2><p>Different feasible plans can favour delay reduction, schedule stability or resource continuity differently.</p><small>Illustrative indicators only. Partner KPIs would be validated during the PoC.</small></div></section>
+        <section class="step" data-scene="7"><div class="step__copy"><span class="eyebrow">08 — HUMAN IN CONTROL</span><h2>The scheduler decides.</h2><p>AI assists. Optimisation verifies. Human judgement remains the final authority.</p></div></section>
+      </div>
+    </section>
+
+    <section class="resolution panel panel--dark">
+      <div class="resolution__inner">
+        <span class="eyebrow eyebrow--dark">FROM DISRUPTION TO RECOVERY</span>
+        <h2>One disruption.<br>One recovery story.<br><span>One scroll.</span></h2>
+        <div class="before-after">
+          <div class="mini-card mini-card--before"><small>BEFORE RECOVERY</small><div class="mini-track"><span class="m-a">A</span><span class="m-b">B +4h</span><span class="m-c">C</span></div><p>Conflict and knock-on pressure remain unresolved.</p></div>
+          <div class="mini-arrow">→</div>
+          <div class="mini-card mini-card--after"><small>AFTER SELECTED RECOVERY</small><div class="mini-track"><span class="m-a">A</span><span class="m-c moved">C</span><span class="m-b recovered">B</span></div><p>Feasible recovery option presented for scheduler approval.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="poc panel panel--light">
+      <div class="poc__inner">
+        <span class="eyebrow">WHAT THE POC TESTS</span>
+        <h2>Not a replacement for a terminal operating system.<br><span class="muted">A focused test of better recovery decision support.</span></h2>
+        <div class="poc-flow">
+          <div><b>01</b><span>Represent a realistic disruption</span></div>
+          <div><b>02</b><span>Apply terminal-specific constraints</span></div>
+          <div><b>03</b><span>Generate feasible recovery options</span></div>
+          <div><b>04</b><span>Compare operational consequences</span></div>
+          <div><b>05</b><span>Support human decision-making</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partner panel panel--soft">
+      <div class="partner__inner">
+        <span class="eyebrow">INDUSTRY VALIDATION</span>
+        <h2>Does this reflect how recovery works in your operation?</h2>
+        <p class="lead">We are looking for operational insight before assuming we understand your terminal.</p>
+        <div class="question-grid">
+          <div><span>01</span><p>What happens today when the schedule is disrupted?</p></div>
+          <div><span>02</span><p>Which constraints matter most in your terminal?</p></div>
+          <div><span>03</span><p>What does a good recovery look like to your team?</p></div>
+          <div><span>04</span><p>Which representative scenario should the PoC test?</p></div>
+        </div>
+        <div class="pathway"><span>Operational discussion</span><i>→</i><span>Representative scenario</span><i>→</i><span>Constraints & KPIs</span><i>→</i><span>PoC validation</span></div>
+        <div class="disclaimer">Illustrative concept demonstration. Scenario, constraints and indicators are not based on a specific terminal and should be validated with an industry partner before use.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div><strong>PortOptimiser</strong><span>Human-in-the-loop schedule recovery decision support</span></div>
+    <span>Proof-of-concept demonstration · Curtin University</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
