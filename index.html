@@ -32,9 +32,12 @@
               <span><b>Operational data</b><small>Current state</small></span>
               <span><b>Scheduler expertise</b><small>Extra context</small></span>
             </div>
-            <div class="workflow-bridge"><b>LLM interface</b><small>Translates scheduler input</small></div>
             <i>→</i>
-            <div class="workflow-engine"><b>Scheduling engine</b><small>Evaluates recovery plans</small></div>
+            <div class="workflow-bridge"><b>LLM interface</b><small>Translate scheduler input</small></div>
+            <i>→</i>
+            <div class="workflow-confirm"><b>Review & confirm</b><small>Scheduler checks interpretation</small></div>
+            <i>→</i>
+            <div class="workflow-engine"><b>Scheduling engine</b><small>Evaluate recovery plans</small></div>
             <i>→</i>
             <div class="workflow-output"><b>Recovery options</b><small>Scheduler review</small></div>
           </div>
@@ -148,23 +151,22 @@
             <div class="confirm-card">
               <div class="confirm-head">
                 <div>
-                  <span class="confirm-kicker">INTERPRETED CHANGES</span>
-                  <h3>Review before recomputation</h3>
+                  <span class="confirm-kicker">LLM INTERPRETATION</span>
+                  <h3>Confirm before recomputing</h3>
                 </div>
-                <span class="confirm-status">Awaiting scheduler confirmation</span>
+                <span class="confirm-status">Scheduler review</span>
               </div>
               <div class="confirm-list">
                 <div><span>Vessel B berth</span><b>Berth 1</b></div>
-                <div><span>Start condition</span><b>After Vessel C finishes</b></div>
-                <div><span>Other vessel assignments</span><b>Keep unchanged</b></div>
-                <div><span>Other reclaiming schedules</span><b>Keep unchanged</b></div>
+                <div><span>Start</span><b>After Vessel C</b></div>
+                <div><span>Other vessels</span><b>Unchanged</b></div>
+                <div><span>Reclaiming schedules</span><b>Unchanged</b></div>
               </div>
-              <div class="confirm-note">The optimisation model does not recompute the revised schedule until the scheduler confirms the interpreted changes.</div>
+              <div class="confirm-note">Only confirmed changes are passed to the scheduling engine.</div>
               <div class="confirm-actions">
-                <span class="confirm-button confirm-button--secondary">Revise instruction</span>
-                <span class="confirm-button confirm-button--primary">Confirm changes</span>
+                <span class="confirm-button confirm-button--secondary">Revise</span>
+                <span class="confirm-button confirm-button--primary">Confirm</span>
               </div>
-              <small>If the interpretation is not correct, the scheduler revises the instruction before recomputation.</small>
             </div>
           </div>
 
@@ -203,7 +205,7 @@
           <div class="scene-scroll-cue" id="sceneScrollCue" aria-hidden="true">
             <div class="scene-scroll-cue__handle"><span></span></div>
             <small>Swipe / scroll</small>
-            <b id="sceneProgress">1 / 5</b>
+            <b id="sceneProgress">1 / 6</b>
           </div>
 
           <div class="scene-caption" id="sceneCaption">
@@ -218,9 +220,10 @@
       <div class="story__steps">
         <section class="step" data-scene="0"><div class="step__copy step__copy--source"><span class="eyebrow">01 — BASELINE</span><h2>Current berth plan.</h2><p>Vessel B: Berth 2, 10:00–14:00. Vessel D follows from 15:00.</p></div></section>
         <section class="step" data-scene="1"><div class="step__copy step__copy--source"><span class="eyebrow">02 — DISRUPTION</span><h2>A four-hour delay creates an overlap on Berth 2.</h2><p>The latest ETA can come from connected operational systems. Three recovery directions are shown.</p></div></section>
-        <section class="step" data-scene="2"><div class="step__copy step__copy--source"><span class="eyebrow">03 — SCHEDULER INPUT</span><h2>Add context the data does not capture.</h2><p>The LLM translates natural-language guidance into model inputs for review.</p><small>LLM = interface, not scheduling engine.</small></div></section>
-        <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — RECOMPUTE</span><h2>The scheduling engine compares recovery plans.</h2><p>It uses the current state, terminal constraints and confirmed scheduler input.</p></div></section>
-        <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — REVIEW</span><h2>Scheduler reviews the recovered plan.</h2><p>Accept it, reject it, or refine the instruction and rerun.</p></div></section>
+        <section class="step" data-scene="2"><div class="step__copy step__copy--source"><span class="eyebrow">03 — SCHEDULER INPUT</span><h2>Add context the data does not capture.</h2><p>The LLM translates natural-language guidance into model inputs.</p><small>LLM = interface, not scheduling engine.</small></div></section>
+        <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — CONFIRM INTERPRETATION</span><h2>Check what the LLM understood.</h2><p>Confirm or revise the interpreted changes before they reach the scheduling engine.</p></div></section>
+        <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — RECOMPUTE</span><h2>The scheduling engine compares recovery plans.</h2><p>It uses the current state, terminal constraints and confirmed scheduler input.</p></div></section>
+        <section class="step" data-scene="5"><div class="step__copy step__copy--source"><span class="eyebrow">06 — REVIEW</span><h2>Scheduler reviews the recovered plan.</h2><p>Accept it, reject it, or refine the instruction and rerun.</p></div></section>
       </div>
     </section>
 

@@ -163,7 +163,7 @@ function chatScene(){
   gsap.to('.chat-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.chat-card',{y:28,scale:.97,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'power3.out',onComplete:typePrompt});
   gsap.fromTo('.role-strip div',{y:15,opacity:0},{y:0,opacity:1,stagger:.08,delay:.35,duration:.35});
-  title.textContent='Scheduler expertise → validated model input';statusText.textContent='LLM bridge';
+  title.textContent='Scheduler input → LLM interpretation';statusText.textContent='Interpret';
 }
 function confirmationScene(){
   hideLayers();
@@ -173,8 +173,8 @@ function confirmationScene(){
   gsap.fromTo('.confirm-list div',{x:-16,opacity:0},{x:0,opacity:1,stagger:.08,delay:.16,duration:.35,ease:'power2.out'});
   gsap.fromTo('.confirm-button',{y:10,opacity:0},{y:0,opacity:1,stagger:.08,delay:.42,duration:.3});
   gsap.fromTo('.confirm-button--primary',{boxShadow:'0 0 0 rgba(0,113,227,0)'},{boxShadow:'0 0 0 7px rgba(0,113,227,.10)',duration:.65,yoyo:true,repeat:1,delay:.72});
-  title.textContent='Review interpreted changes before recomputation';
-  statusText.textContent='Confirm';
+  title.textContent='Confirm the LLM interpretation';
+  statusText.textContent='Scheduler review';
   statusDot.style.background='#ff9f0a';
   statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
 }
@@ -196,7 +196,7 @@ function approvalScene(){
   statusDot.style.background='#34c759';
   statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
 }
-const scenes=[baseScene,disruptionScene,chatScene,optionsScene,approvalScene];
+const scenes=[baseScene,disruptionScene,chatScene,confirmationScene,optionsScene,approvalScene];
 
 function activateScene(i){
   activeScene = Math.max(0, Math.min(i, scenes.length - 1));
@@ -339,7 +339,7 @@ if(!reduced){
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
 
-    // Do not trap the user's swipe at the beginning or end of the 5-scene story.
+    // Do not trap the user's swipe at the beginning or end of the 6-scene story.
     // Allow Safari to take over and continue down to the PoC/industry sections.
     if(isStoryBoundaryExit(direction)){
       restoreShell();

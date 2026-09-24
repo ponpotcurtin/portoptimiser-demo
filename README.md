@@ -27,8 +27,10 @@ Open `index.html` in a browser. For the most reliable local preview, run a simpl
 - Scroll-only interaction
 - Premium minimal visual language
 - Mobile-first QR experience
-- One disruption → one recovery story → five focused scenes → one compact industry collaboration section
+- One disruption → one recovery story → six focused scenes → one compact industry collaboration section
 - Connected operational systems can provide the current schedule and operating data
 - Scheduler expertise enters through natural language when human context or priorities are needed
 - The LLM is an interaction/translation layer; the optimisation model remains the scheduling engine
 - Clear separation of data systems, LLM interface, optimisation engine and human decision authority; no separate AI infeasibility detector is assumed
+
+- Scheduler confirms the LLM interpretation before the scheduling engine recomputes

@@ -370,3 +370,52 @@
   .about__lead{font-size:15px}
   .about-grid{grid-template-columns:1fr;margin-top:28px}
 }
+
+
+/* Human confirmation workflow */
+.hero-workflow{width:min(940px,94vw)}
+.hero-workflow__body{
+  grid-template-columns:1.45fr auto .9fr auto .9fr auto 1.05fr auto .9fr;
+  gap:7px;
+}
+.workflow-confirm{
+  min-width:0;
+  padding:9px 10px;
+  border-radius:12px;
+  background:#fff8ef;
+  border:1px solid #f0dfc8;
+}
+.workflow-confirm b{display:block;font-size:9px;line-height:1.15}
+.workflow-confirm small{display:block;margin-top:3px;font-size:7px;line-height:1.2;color:var(--muted)}
+
+.confirm-card{width:min(660px,84%);padding:24px}
+.confirm-head{padding-bottom:14px}
+.confirm-head h3{font-size:21px}
+.confirm-list div{padding:10px 2px}
+.confirm-note{margin-top:10px}
+.confirm-actions{margin-top:14px}
+
+@media(max-width:800px){
+  .hero-workflow__body{
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-areas:none;
+    gap:4px;
+  }
+  .hero-workflow__body>i{
+    transform:rotate(90deg);
+    line-height:1;
+  }
+  .workflow-inputs,
+  .workflow-bridge,
+  .workflow-confirm,
+  .workflow-engine,
+  .workflow-output{
+    grid-area:auto;
+  }
+  .workflow-inputs{grid-template-columns:1fr 1fr}
+  .workflow-confirm{padding:7px}
+  .workflow-confirm b{font-size:7px}
+  .workflow-confirm small{font-size:6px}
+  .confirm-card{width:100%;padding:11px 12px}
+}
