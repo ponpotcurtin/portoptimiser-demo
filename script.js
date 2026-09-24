@@ -232,7 +232,16 @@ if(!reduced){
   gsap.to('.port-vessel-bg',{xPercent:360,yPercent:-30,rotation:2,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
   gsap.to('.yard-grid',{yPercent:-10,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
 
+  const story = document.querySelector('.story');
+  const storyVisual = document.querySelector('.story__visual');
   const steps = Array.from(document.querySelectorAll('.step'));
+  let gestureLock = false;
+  let manualNavigation = false;
+  let touchStartY = null;
+
+  // Declare navigation state before creating ScrollTriggers. Some browsers
+  // (notably mobile Safari during refresh/layout) may evaluate trigger state
+  // immediately when a trigger is created.
   steps.forEach((step,i)=>{
     ScrollTrigger.create({
       trigger:step,
@@ -243,11 +252,6 @@ if(!reduced){
       onLeaveBack:()=>{ if(!manualNavigation) activateScene(Math.max(0,i-1)); }
     });
   });
-
-  const story = document.querySelector('.story');
-  let gestureLock = false;
-  let manualNavigation = false;
-  let touchStartY = null;
 
   function storyIsActive(){
     const rect = story.getBoundingClientRect();
@@ -329,37 +333,39 @@ if(!reduced){
     goToScene(activeScene + direction,direction);
   },{passive:false});
 
-  story.addEventListener('touchstart',(event)=>{
+  // Mobile: capture gestures on the sticky visual itself. This makes the
+  // six demonstration scenes behave like deliberate slides instead of letting
+  // Safari free-scroll through the invisible trigger sections.
+  storyVisual.addEventListener('touchstart',(event)=>{
     if(!storyIsActive() || gestureLock) return;
     touchStartY = event.changedTouches[0]?.clientY ?? null;
     gsap.killTweensOf(shell);
   },{passive:true});
 
-  story.addEventListener('touchmove',(event)=>{
+  storyVisual.addEventListener('touchmove',(event)=>{
     if(!storyIsActive() || gestureLock || touchStartY === null) return;
     const y = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
 
-    // Do not trap the user's swipe at the beginning or end of the 6-scene story.
-    // Allow Safari to take over and continue down to the PoC/industry sections.
+    // Only release the browser at the true beginning/end of the story.
     if(isStoryBoundaryExit(direction)){
       restoreShell();
       return;
     }
 
     event.preventDefault();
-    const progress = Math.min(Math.abs(delta) / 120, 1);
+    const progress = Math.min(Math.abs(delta) / 110, 1);
     setShellPull(progress,direction);
   },{passive:false});
 
-  story.addEventListener('touchend',(event)=>{
+  storyVisual.addEventListener('touchend',(event)=>{
     if(!storyIsActive() || gestureLock || touchStartY === null) return;
     const endY = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - endY;
     touchStartY = null;
 
-    if(Math.abs(delta) < 38){
+    if(Math.abs(delta) < 34){
       restoreShell();
       return;
     }
@@ -371,10 +377,11 @@ if(!reduced){
       return;
     }
 
+    event.preventDefault();
     goToScene(activeScene + direction,direction);
-  },{passive:true});
+  },{passive:false});
 
-  story.addEventListener('touchcancel',()=>{
+  storyVisual.addEventListener('touchcancel',()=>{
     touchStartY = null;
     restoreShell();
   },{passive:true});
