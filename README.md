@@ -27,5 +27,8 @@ Open `index.html` in a browser. For the most reliable local preview, run a simpl
 - Scroll-only interaction
 - Premium minimal visual language
 - Mobile-first QR experience
-- One disruption → one recovery story → one scroll
-- Clear separation of LLM, optimisation engine and human decision authority
+- One disruption → one recovery story → six focused scenes
+- Operational data updates the current state automatically where connected data is available
+- Scheduler expertise enters through natural language when human context or priorities are needed
+- The LLM is an interaction/translation layer; the optimisation model remains the scheduling engine
+- Clear separation of data systems, LLM interface, optimisation engine and human decision authority
