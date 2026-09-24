@@ -8,6 +8,7 @@ const statusText = status.querySelector('span');
 const statusDot = status.querySelector('i');
 const promptTarget = "Berth 1 is available after Vessel C finishes. Reassign Vessel B there, and keep all other vessel assignments and reclaiming schedules unchanged.";
 let typingTimer = null;
+let combinedRecoveryTimeline = null;
 
 const captionIndex = document.getElementById('captionIndex');
 const captionEyebrow = document.getElementById('captionEyebrow');
@@ -42,6 +43,10 @@ function setSceneCaption(i){
 }
 
 function killSceneTweens(){
+  if(combinedRecoveryTimeline){
+    combinedRecoveryTimeline.kill();
+    combinedRecoveryTimeline = null;
+  }
   gsap.killTweensOf([
     '.vessel-b','.delay-ghost','.delayed-start-marker','.conflict-window','.dependency-row','.dependency-node',
     '.timeline-head','.berth-grid',
@@ -85,13 +90,28 @@ function baseScene(){
 function disruptionScene(){
   resetTransientState();
   showSchedule();
-  title.textContent='Operational data update: Vessel B +4h';statusText.textContent='Auto-updated';
-  statusDot.style.background='#ff9f0a';statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
-  gsap.to('.delay-ghost',{opacity:1,duration:.3});
-  gsap.to('.delayed-start-marker',{opacity:1,duration:.3,delay:.4});
-  gsap.to('.conflict-window',{opacity:1,duration:.35,delay:.55});
-  gsap.fromTo('.dependency-node',{opacity:.45,scale:.98},{opacity:1,scale:1,stagger:.08,duration:.35,delay:.3});
-  gsap.to('.vessel-b',{xPercent:100,background:'#fff1df',color:'#9a4f00',duration:.9,ease:'power3.inOut'});
+  title.textContent='Operational data update: Vessel B +4h';
+  statusText.textContent='Auto-updated';
+  statusDot.style.background='#ff9f0a';
+  statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
+
+  gsap.set('.decision-layer',{autoAlpha:0});
+  gsap.set('.decision-center',{scale:.9,opacity:0});
+  gsap.set('.decision-option',{y:30,opacity:0});
+
+  combinedRecoveryTimeline = gsap.timeline();
+  combinedRecoveryTimeline
+    .to('.delay-ghost',{opacity:1,duration:.25},0)
+    .to('.delayed-start-marker',{opacity:1,duration:.25},0.2)
+    .to('.conflict-window',{opacity:1,duration:.3},0.35)
+    .fromTo('.dependency-node',{opacity:.45,scale:.98},{opacity:1,scale:1,stagger:.06,duration:.3},0.18)
+    .to('.vessel-b',{xPercent:100,background:'#fff1df',color:'#9a4f00',duration:.8,ease:'power3.inOut'},0)
+    .add(()=>{ title.textContent='Updated state → Berth 2 conflict'; statusText.textContent='Conflict'; },0.78)
+    .to(['.timeline-head','.berth-grid','.dependency-row'],{autoAlpha:0,duration:.3,ease:'power2.out'},1.25)
+    .to('.decision-layer',{autoAlpha:1,duration:.25},1.34)
+    .fromTo('.decision-center',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.35},1.38)
+    .fromTo('.decision-option',{y:26,opacity:0},{y:0,opacity:1,stagger:.1,duration:.4,ease:'power3.out'},1.45)
+    .add(()=>{ title.textContent='Conflict detected → evaluate recovery directions'; statusText.textContent='3 options'; },1.36);
 }
 function impactScene(){
   resetTransientState();
@@ -186,7 +206,7 @@ function approvalScene(){
   statusDot.style.background='#34c759';
   statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
 }
-const scenes=[baseScene,disruptionScene,decisionScene,chatScene,optionsScene,approvalScene];
+const scenes=[baseScene,disruptionScene,chatScene,optionsScene,approvalScene];
 
 function activateScene(i){
   activeScene = Math.max(0, Math.min(i, scenes.length - 1));
@@ -329,7 +349,7 @@ if(!reduced){
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
 
-    // Do not trap the user's swipe at the beginning or end of the 6-scene story.
+    // Do not trap the user's swipe at the beginning or end of the 5-scene story.
     // Allow Safari to take over and continue down to the PoC/industry sections.
     if(isStoryBoundaryExit(direction)){
       restoreShell();
