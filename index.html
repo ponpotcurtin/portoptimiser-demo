@@ -260,8 +260,8 @@
     <section class="collaboration panel panel--soft">
       <div class="collaboration__inner">
         <span class="eyebrow">INDUSTRY COLLABORATION</span>
-        <h2>Scale PortOptimiser to a realistic terminal.</h2>
-        <p>Real recovery depends on interconnected berth, vessel, stockpile, reclaimer, throughput and KPI decisions. A partner PoC can be configured around the actual operating environment.</p>
+        <h2>One disruption can affect the whole terminal.</h2>
+        <p>A vessel delay can shift berth assignments, vessel queues, stockpile and reclaimer timing, and throughput targets. PortOptimiser evaluates recovery across these connected decisions rather than treating the berth schedule in isolation.</p>
 
         <div class="collaboration-tags">
           <span>Disruption scenario</span>
@@ -273,9 +273,46 @@
           <div class="terminal-context-head">
             <div>
               <span>ILLUSTRATIVE TERMINAL CONFIGURATION</span>
-              <h3>More realistic recovery context</h3>
+              <h3>How one disruption can propagate</h3>
             </div>
             <span class="terminal-context-note">Example only · partner-specific configuration</span>
+          </div>
+
+          <div class="impact-chain" aria-label="Illustrative disruption propagation">
+            <div class="impact-node impact-node--alert">
+              <span>1 · DISRUPTION</span>
+              <b>V03 delayed +4h</b>
+              <small>Arrival / service timing changes</small>
+            </div>
+            <i>→</i>
+            <div class="impact-node">
+              <span>2 · BERTH PLAN</span>
+              <b>B3 timing shifts</b>
+              <small>Reassignment or waiting may be needed</small>
+            </div>
+            <i>→</i>
+            <div class="impact-node">
+              <span>3 · VESSEL QUEUE</span>
+              <b>Downstream windows move</b>
+              <small>Other vessels can be affected</small>
+            </div>
+            <i>→</i>
+            <div class="impact-node">
+              <span>4 · MATERIAL FLOW</span>
+              <b>Stockpile / reclaimer timing changes</b>
+              <small>Material must still be ready at the right berth</small>
+            </div>
+            <i>→</i>
+            <div class="impact-node">
+              <span>5 · KPIs</span>
+              <b>Delay / throughput trade-offs</b>
+              <small>Recovery quality must be compared</small>
+            </div>
+          </div>
+
+          <div class="coordination-message">
+            <strong>Why PortOptimiser?</strong>
+            <span>Recovery is a coordination problem: multiple schedules, resources and KPIs must be reconciled at the same time.</span>
           </div>
 
           <div class="terminal-context-grid">
@@ -291,7 +328,7 @@
 
               <div class="terminal-berth-row"><b>B1</b><div class="terminal-berth-track"><span class="tv tv-1">V01</span><span class="tv tv-2">V06</span></div></div>
               <div class="terminal-berth-row"><b>B2</b><div class="terminal-berth-track"><span class="tv tv-3">V02</span><span class="tv tv-4">V07</span></div></div>
-              <div class="terminal-berth-row"><b>B3</b><div class="terminal-berth-track"><span class="tv tv-5">V03</span><span class="tv tv-6">V08</span></div></div>
+              <div class="terminal-berth-row"><b>B3</b><div class="terminal-berth-track"><span class="tv tv-5 tv-impact">V03 +4h</span><span class="tv tv-6">V08</span></div></div>
               <div class="terminal-berth-row"><b>B4</b><div class="terminal-berth-track"><span class="tv tv-7">V04</span><span class="tv tv-8">V09</span></div></div>
               <div class="terminal-berth-row"><b>B5</b><div class="terminal-berth-track"><span class="tv tv-9">V05</span><span class="tv tv-10">V10</span></div></div>
 
@@ -314,7 +351,7 @@
                   <span class="network-label">STOCKPILES</span>
                   <div class="stockpile sp-a"><b>SP-A</b><small>68%</small></div>
                   <div class="stockpile sp-b"><b>SP-B</b><small>42%</small></div>
-                  <div class="stockpile sp-c"><b>SP-C</b><small>81%</small></div>
+                  <div class="stockpile sp-c network-impact"><b>SP-C</b><small>81% · timing affected</small></div>
                   <div class="stockpile sp-d"><b>SP-D</b><small>55%</small></div>
                 </div>
 
@@ -325,7 +362,7 @@
                 <div class="reclaimer-column">
                   <span class="network-label">RECLAIMERS</span>
                   <div class="reclaimer"><b>R1</b><small>SP-A → B1</small></div>
-                  <div class="reclaimer"><b>R2</b><small>SP-C → B3</small></div>
+                  <div class="reclaimer network-impact"><b>R2</b><small>SP-C → B3 · reschedule?</small></div>
                   <div class="reclaimer"><b>R3</b><small>SP-D → B5</small></div>
                 </div>
               </div>
@@ -354,13 +391,14 @@
               <div class="recovery-kpis">
                 <div><span>Delay impact</span><b>Track</b><small>Vessel &amp; queue delay</small></div>
                 <div><span>Berth changes</span><b>Track</b><small>Schedule deviation</small></div>
-                <div><span>Queue impact</span><b>Track</b><small>Downstream effects</small></div>
-                <div><span>Throughput loss</span><b>Track</b><small>Recovery trade-off</small></div>
+                <div class="kpi-impact"><span>Queue impact</span><b>Re-evaluate</b><small>Downstream vessel windows</small></div>
+                <div class="kpi-impact"><span>Throughput loss</span><b>Re-evaluate</b><small>Recovery trade-off</small></div>
               </div>
             </aside>
           </div>
 
-          <div class="terminal-context-footer">
+          <div class="terminal-context-footer terminal-context-footer--message">
+            <strong>Connected decisions:</strong>
             <span>BERTH PLAN</span><i>↔</i><span>VESSEL QUEUE</span><i>↔</i><span>STOCKPILES</span><i>↔</i><span>RECLAIMERS</span><i>↔</i><span>THROUGHPUT / KPIs</span>
           </div>
         </div>
