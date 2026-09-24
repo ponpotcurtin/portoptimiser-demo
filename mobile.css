@@ -1,0 +1,636 @@
+/* Mobile readability layer for PortOptimiser
+   Keeps all project content unchanged while improving legibility and spacing
+   on iPhone-class viewports. */
+@media (max-width: 600px) {
+  :root {
+    --mobile-pad: 18px;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .nav {
+    height: 54px;
+  }
+  .nav__inner {
+    height: 54px;
+    padding: 0 var(--mobile-pad);
+  }
+  .brand {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .nav__meta {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+  .hero__content {
+    width: 100%;
+    padding: 104px var(--mobile-pad) 58px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: .1em;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 11vw, 54px);
+    line-height: .99;
+    letter-spacing: -.045em;
+  }
+  .lead {
+    font-size: 18px;
+    line-height: 1.45;
+    max-width: 35ch;
+    margin-top: 24px;
+  }
+
+  /* Make the hero workflow readable without changing its content. */
+  .hero-workflow {
+    width: 100%;
+    margin-top: 30px;
+    padding: 16px;
+    border-radius: 24px;
+  }
+  .hero-workflow__head strong {
+    font-size: 15px;
+  }
+  .hero-workflow__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .hero-workflow__body > i {
+    transform: rotate(90deg);
+    justify-self: center;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .workflow-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .workflow-inputs span,
+  .workflow-bridge,
+  .workflow-confirm,
+  .workflow-engine,
+  .workflow-output {
+    min-height: 66px;
+    padding: 12px 13px;
+    border-radius: 15px;
+  }
+  .hero-workflow b {
+    font-size: 13px;
+    line-height: 1.2;
+  }
+  .hero-workflow small {
+    font-size: 11px;
+    line-height: 1.35;
+    margin-top: 4px;
+  }
+  .scroll-cue {
+    margin-top: 34px;
+    font-size: 13px;
+  }
+
+  /* Story stage */
+  .story__visual {
+    top: 54px;
+    height: calc(100svh - 54px);
+    padding: 8px;
+  }
+  .terminal-shell {
+    --scene-header-h: 74px;
+    --scene-caption-h: 154px;
+    --scene-caption-bottom: 8px;
+    --scene-stage-gap: 12px;
+    width: calc(100vw - 16px);
+    height: calc(100svh - 70px);
+    border-radius: 24px;
+  }
+  .terminal-topline {
+    height: 74px;
+    padding: 14px 15px;
+  }
+  .micro {
+    font-size: 10px;
+    letter-spacing: .11em;
+  }
+  .terminal-topline strong {
+    font-size: 17px;
+    line-height: 1.05;
+    margin-top: 5px;
+  }
+  .status-pill {
+    gap: 7px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .status-pill i {
+    width: 8px;
+    height: 8px;
+  }
+
+  .timeline-head {
+    margin-left: 76px;
+    padding: 14px 14px 8px;
+    font-size: 10px;
+  }
+  .berth-grid {
+    grid-template-columns: 76px 1fr;
+    grid-template-rows: 70px 70px;
+    padding-right: 12px;
+  }
+  .berth-label {
+    padding-left: 12px;
+    font-size: 10px;
+  }
+  .track {
+    height: 46px;
+    border-radius: 13px;
+  }
+  .vessel {
+    top: 6px;
+    height: 34px;
+    padding: 0 7px;
+    font-size: 11px;
+  }
+  .vessel span {
+    width: 23px;
+    height: 23px;
+    font-size: 11px;
+  }
+  .vessel small {
+    display: none;
+  }
+  .delay-ghost {
+    top: 6px;
+    height: 34px;
+  }
+  .delayed-start-marker span,
+  .conflict-window span {
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .dependency-row {
+    margin: 8px 12px 0 76px;
+    padding: 9px;
+    border-radius: 14px;
+  }
+  .dependency-label {
+    margin-bottom: 7px;
+  }
+  .dependency-label span {
+    font-size: 8px;
+  }
+  .dependency-label small {
+    display: none;
+  }
+  .dependency-flow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .dependency-flow > i {
+    display: none;
+  }
+  .dependency-node {
+    padding: 8px 9px;
+    border-radius: 9px;
+  }
+  .dependency-node b {
+    font-size: 10px;
+    white-space: normal;
+  }
+  .dependency-node span {
+    font-size: 8.5px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  /* Recovery direction cards */
+  .decision-center {
+    top: 22%;
+    width: 100%;
+    padding: 0 18px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+  .decision-option {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto;
+    padding: 12px 14px;
+    border-radius: 16px;
+    text-align: left;
+  }
+  .decision-option b {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .decision-option span {
+    font-size: 12px;
+    white-space: normal;
+  }
+  .d1 { top: 34%; }
+  .d2 { top: 51%; }
+  .d3 { top: 68%; }
+
+  /* Scheduler / LLM scene */
+  .chat-layer {
+    padding: 10px;
+    gap: 10px;
+  }
+  .chat-card {
+    width: 100%;
+    padding: 17px;
+    border-radius: 20px;
+  }
+  .chat-head b {
+    font-size: 13px;
+  }
+  .chat-head small {
+    font-size: 11px;
+  }
+  .prompt-line {
+    margin-top: 14px;
+    min-height: 54px;
+    padding: 14px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .chat-response {
+    font-size: 12px;
+  }
+  .role-strip {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .role-strip div {
+    padding: 10px 11px;
+    border-radius: 13px;
+  }
+  .role-strip b {
+    font-size: 10px;
+  }
+  .role-strip span {
+    font-size: 9px;
+  }
+  .role-note {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  /* Confirmation scene */
+  .confirm-layer,
+  .options-layer,
+  .approval-layer,
+  .engine-layer {
+    padding: 10px;
+  }
+  .confirm-card,
+  .result-card,
+  .recovery-dashboard {
+    width: 100%;
+    padding: 16px;
+    border-radius: 20px;
+  }
+  .confirm-kicker,
+  .option-kicker {
+    font-size: 9px;
+  }
+  .confirm-head,
+  .result-head {
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .confirm-head h3,
+  .result-head h3 {
+    font-size: 19px;
+    line-height: 1.08;
+  }
+  .confirm-status,
+  .result-status {
+    font-size: 9px;
+    padding: 6px 8px;
+  }
+  .confirm-list div {
+    padding: 10px 1px;
+  }
+  .confirm-list span,
+  .confirm-list b {
+    font-size: 12px;
+  }
+  .confirm-note,
+  .result-note {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .confirm-button {
+    min-height: 38px;
+    font-size: 11px;
+  }
+
+  /* Scheduling engine flow: readable vertical cards */
+  .engine-flow {
+    gap: 5px;
+    padding: 10px 0 9px;
+  }
+  .engine-flow__box {
+    padding: 10px 11px;
+    border-radius: 11px;
+  }
+  .engine-flow__box > span {
+    font-size: 8px;
+  }
+  .engine-flow__box > b {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .engine-flow__box > small {
+    display: inline-block;
+    margin: 5px 8px 0 0;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  .engine-flow__arrow {
+    height: 13px;
+    font-size: 9px;
+  }
+  .result-grid--vertical > div {
+    padding: 10px 2px;
+    gap: 8px;
+  }
+  .result-grid span,
+  .result-grid b {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  /* Recovered schedule */
+  .recovery-head span,
+  .recovery-ready {
+    font-size: 8px;
+  }
+  .recovery-head h3 {
+    font-size: 18px;
+    line-height: 1.1;
+  }
+  .recovery-times {
+    font-size: 8px;
+  }
+  .recovery-row > b {
+    font-size: 8px;
+  }
+  .recovery-track {
+    height: 35px;
+  }
+  .r-vessel,
+  .baseline-b {
+    font-size: 8px;
+  }
+  .recovery-legend span {
+    font-size: 8px;
+  }
+  .recovery-analysis {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .recovery-analysis div {
+    padding: 9px;
+  }
+  .recovery-analysis span {
+    font-size: 8px;
+  }
+  .recovery-analysis b {
+    font-size: 10px;
+  }
+  .recovery-analysis small {
+    font-size: 8px;
+  }
+
+  /* Caption is intentionally large enough to read at arm's length. */
+  .scene-caption {
+    left: 10px;
+    right: 10px;
+    padding: 14px 15px;
+    border-radius: 19px;
+  }
+  .scene-caption__meta {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .scene-caption__meta span {
+    width: 27px;
+    height: 27px;
+    font-size: 10px;
+  }
+  .scene-caption__meta b {
+    font-size: 10px;
+  }
+  .scene-caption h2 {
+    font-size: 24px;
+    line-height: 1.06;
+  }
+  .scene-caption p {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .scene-caption small {
+    font-size: 10px;
+  }
+  .scene-scroll-cue small,
+  .scene-scroll-cue b {
+    font-size: 8px;
+  }
+
+  /* Industry collaboration */
+  .collaboration__inner,
+  .about__inner {
+    padding-left: var(--mobile-pad);
+    padding-right: var(--mobile-pad);
+  }
+  .collaboration h2,
+  .about h2 {
+    font-size: clamp(38px, 10vw, 50px);
+    line-height: 1.02;
+  }
+  .collaboration__inner > p,
+  .about__lead {
+    font-size: 17px;
+    line-height: 1.48;
+  }
+  .collaboration-tags {
+    gap: 8px;
+  }
+  .collaboration-tags span {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+
+  .terminal-context-dashboard {
+    padding: 14px;
+  }
+  .terminal-context-head {
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .terminal-context-head > div > span,
+  .terminal-context-note {
+    font-size: 8px;
+    line-height: 1.3;
+  }
+  .terminal-context-head h3 {
+    font-size: 20px;
+  }
+  .impact-node {
+    padding: 10px 11px;
+  }
+  .impact-node > span {
+    font-size: 8px;
+  }
+  .impact-node > b {
+    font-size: 11px;
+  }
+  .impact-node > small {
+    font-size: 9px;
+  }
+  .coordination-message strong {
+    font-size: 10px;
+  }
+  .coordination-message span {
+    font-size: 10px;
+  }
+
+  .context-card-head b {
+    font-size: 11px;
+  }
+  .context-card-head span,
+  .context-card-head small,
+  .network-label,
+  .reclaimer-schedule > span,
+  .throughput-target > span,
+  .vessel-queue > span {
+    font-size: 8px;
+  }
+  .terminal-time-axis {
+    font-size: 8px;
+  }
+  .terminal-berth-row > b {
+    font-size: 9px;
+  }
+  .tv {
+    font-size: 7px;
+  }
+  .vessel-queue b {
+    font-size: 7px;
+  }
+  .stockpile b,
+  .reclaimer b {
+    font-size: 10px;
+  }
+  .stockpile small,
+  .reclaimer small {
+    font-size: 8px;
+  }
+  .reclaimer-schedule > div > b {
+    font-size: 8px;
+  }
+  .throughput-target > b {
+    font-size: 18px;
+  }
+  .throughput-target > small {
+    font-size: 8px;
+  }
+  .recovery-kpis span {
+    font-size: 8px;
+  }
+  .recovery-kpis b {
+    font-size: 10px;
+  }
+  .recovery-kpis small {
+    font-size: 8px;
+  }
+  .terminal-context-footer span,
+  .terminal-context-footer--message strong {
+    font-size: 8px;
+  }
+
+  /* About page */
+  .about {
+    min-height: auto;
+    padding: 76px 0;
+  }
+  .about__inner {
+    width: 100%;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .about-grid article {
+    padding: 24px;
+    border-radius: 24px;
+  }
+  .about-grid article > span {
+    font-size: 11px;
+  }
+  .about-grid h3 {
+    font-size: 22px;
+  }
+  .about-grid p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .footer {
+    padding: 24px var(--mobile-pad);
+    gap: 12px;
+  }
+  .footer strong {
+    font-size: 14px;
+  }
+  .footer span {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+}
+
+/* Extra-small iPhones: preserve readability while avoiding horizontal overflow. */
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 38px;
+  }
+  .nav__meta {
+    font-size: 13px;
+  }
+  .workflow-inputs {
+    grid-template-columns: 1fr;
+  }
+  .timeline-head {
+    margin-left: 68px;
+    font-size: 9px;
+  }
+  .berth-grid {
+    grid-template-columns: 68px 1fr;
+  }
+  .dependency-row {
+    margin-left: 68px;
+  }
+  .scene-caption h2 {
+    font-size: 22px;
+  }
+}
