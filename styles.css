@@ -242,12 +242,12 @@
 .hero__content{padding-top:104px}
 .hero .lead{max-width:800px;margin-top:18px}
 .hero-workflow{
-  width:min(760px,92vw);
-  margin:28px auto 0;
+  width:min(900px,95vw);
+  margin:30px auto 0;
   background:rgba(255,255,255,.9);
   border:1px solid rgba(210,210,215,.72);
-  border-radius:20px;
-  padding:14px 16px 13px;
+  border-radius:23px;
+  padding:17px 19px 16px;
   box-shadow:0 14px 38px rgba(0,0,0,.055);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
@@ -261,14 +261,14 @@
   padding-bottom:10px;
   border-bottom:1px solid #ececf0;
 }
-.hero-workflow__head strong{font-size:12px}
-.hero-workflow__head span{font-size:9px;color:var(--muted);font-weight:600}
+.hero-workflow__head strong{font-size:14px}
+.hero-workflow__head span{font-size:10px;color:var(--muted);font-weight:600}
 .hero-workflow__body{
   display:grid;
   grid-template-columns:1.25fr 1fr auto 1.15fr auto 1fr;
   align-items:center;
   gap:9px;
-  padding-top:11px;
+  padding-top:13px;
 }
 .workflow-inputs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .workflow-inputs span,
@@ -276,8 +276,8 @@
 .workflow-engine,
 .workflow-output{
   min-width:0;
-  padding:9px 10px;
-  border-radius:12px;
+  padding:11px 12px;
+  border-radius:14px;
   background:#f7f7f9;
   border:1px solid #ececf0;
 }
@@ -285,8 +285,8 @@
 .workflow-bridge{background:#f4f0ff;border-color:#e4dbff}
 .workflow-engine{background:#eef6ff;border-color:#d8eaff}
 .workflow-output{background:#eef8ef;border-color:#dbeedc}
-.hero-workflow b{display:block;font-size:9px;line-height:1.15}
-.hero-workflow small{display:block;margin-top:3px;font-size:7px;line-height:1.2;color:var(--muted)}
+.hero-workflow b{display:block;font-size:10.5px;line-height:1.15}
+.hero-workflow small{display:block;margin-top:4px;font-size:8px;line-height:1.2;color:var(--muted)}
 .hero-workflow__body>i{font-style:normal;color:#8e8e93;font-size:12px;text-align:center}
 .scroll-cue{margin-top:32px}
 
@@ -340,10 +340,10 @@
 @media(max-width:800px){
   .hero__content{padding-top:88px}
   .hero .lead{font-size:15px;line-height:1.4;margin-top:16px}
-  .hero-workflow{margin-top:20px;padding:11px 12px}
+  .hero-workflow{margin-top:21px;padding:13px 14px}
   .hero-workflow__head{padding-bottom:8px}
-  .hero-workflow__head strong{font-size:10px}
-  .hero-workflow__head span{font-size:7px}
+  .hero-workflow__head strong{font-size:11px}
+  .hero-workflow__head span{font-size:8px}
   .hero-workflow__body{
     grid-template-columns:1fr auto 1fr;
     grid-template-areas:
@@ -357,9 +357,9 @@
   .workflow-output{grid-area:output}
   .hero-workflow__body>i:nth-of-type(1){grid-area:arrow1}
   .hero-workflow__body>i:nth-of-type(2){grid-area:arrow2}
-  .workflow-inputs span,.workflow-bridge,.workflow-engine,.workflow-output{padding:7px}
-  .hero-workflow b{font-size:7px}
-  .hero-workflow small{font-size:6px}
+  .workflow-inputs span,.workflow-bridge,.workflow-engine,.workflow-output{padding:8px}
+  .hero-workflow b{font-size:8px}
+  .hero-workflow small{font-size:6.5px}
   .scroll-cue{margin-top:24px}
   .scene-caption{min-height:154px;padding:11px 12px}
   .collaboration__inner{padding:58px 0}
@@ -373,20 +373,20 @@
 
 
 /* Human confirmation workflow */
-.hero-workflow{width:min(940px,94vw)}
+.hero-workflow{width:min(1110px,96vw)}
 .hero-workflow__body{
   grid-template-columns:1.45fr auto .9fr auto .9fr auto 1.05fr auto .9fr;
   gap:7px;
 }
 .workflow-confirm{
   min-width:0;
-  padding:9px 10px;
-  border-radius:12px;
+  padding:11px 12px;
+  border-radius:14px;
   background:#fff8ef;
   border:1px solid #f0dfc8;
 }
-.workflow-confirm b{display:block;font-size:9px;line-height:1.15}
-.workflow-confirm small{display:block;margin-top:3px;font-size:7px;line-height:1.2;color:var(--muted)}
+.workflow-confirm b{display:block;font-size:10.5px;line-height:1.15}
+.workflow-confirm small{display:block;margin-top:4px;font-size:8px;line-height:1.2;color:var(--muted)}
 
 .confirm-card{width:min(660px,84%);padding:24px}
 .confirm-head{padding-bottom:14px}
@@ -414,8 +414,8 @@
     grid-area:auto;
   }
   .workflow-inputs{grid-template-columns:1fr 1fr}
-  .workflow-confirm{padding:7px}
-  .workflow-confirm b{font-size:7px}
-  .workflow-confirm small{font-size:6px}
+  .workflow-confirm{padding:8px}
+  .workflow-confirm b{font-size:8px}
+  .workflow-confirm small{font-size:6.5px}
   .confirm-card{width:100%;padding:11px 12px}
 }
