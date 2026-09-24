@@ -1451,3 +1451,88 @@
   .engine-flow__box>b{font-size:7px;margin-top:2px}.engine-flow__box>small{font-size:5px;margin-top:1px}
   .result-grid--vertical>div{padding:5px 2px}
 }
+
+
+/* Static demonstration mode
+   The six PoC scenes are navigated explicitly with Previous/Next controls.
+   This avoids scroll hijacking and sticky scene-transition issues across
+   Safari, iPhone and desktop browsers. */
+.story {
+  min-height: auto;
+  padding: 34px 0 44px;
+}
+.story__visual {
+  position: relative;
+  top: auto;
+  height: auto;
+  min-height: 0;
+  padding: 18px 3vw;
+  overflow: visible;
+}
+.story__steps {
+  display: none;
+}
+.terminal-shell {
+  height: min(760px, calc(100vh - 90px));
+  min-height: 620px;
+}
+.scene-scroll-cue {
+  display: none !important;
+}
+.scene-controls {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 190px;
+  z-index: 35;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+.scene-controls > span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+.scene-control {
+  min-height: 42px;
+  border: 1px solid #d2d2d7;
+  border-radius: 999px;
+  background: rgba(255,255,255,.96);
+  color: var(--ink);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 15px;
+  cursor: pointer;
+}
+.scene-control:first-child {
+  justify-self: start;
+}
+.scene-control:last-child {
+  justify-self: end;
+}
+.scene-control--primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.scene-control:disabled {
+  cursor: default;
+  opacity: .38;
+}
+
+@media (max-width: 800px) {
+  .story {
+    padding: 18px 0 28px;
+  }
+  .story__visual {
+    padding: 7px;
+  }
+  .terminal-shell {
+    min-height: 0;
+  }
+}
