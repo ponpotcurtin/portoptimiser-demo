@@ -260,12 +260,109 @@
     <section class="collaboration panel panel--soft">
       <div class="collaboration__inner">
         <span class="eyebrow">INDUSTRY COLLABORATION</span>
-        <h2>Test PortOptimiser on a real recovery scenario.</h2>
-        <p>We are seeking industry input on one disruption, the constraints that matter, and how your team defines a good recovery.</p>
+        <h2>Scale PortOptimiser to a realistic terminal.</h2>
+        <p>Real recovery depends on interconnected berth, vessel, stockpile, reclaimer, throughput and KPI decisions. A partner PoC can be configured around the actual operating environment.</p>
+
         <div class="collaboration-tags">
           <span>Disruption scenario</span>
           <span>Operational constraints</span>
           <span>Recovery priorities / KPIs</span>
+        </div>
+
+        <div class="terminal-context-dashboard" aria-label="Illustrative realistic terminal configuration">
+          <div class="terminal-context-head">
+            <div>
+              <span>ILLUSTRATIVE TERMINAL CONFIGURATION</span>
+              <h3>More realistic recovery context</h3>
+            </div>
+            <span class="terminal-context-note">Example only · partner-specific configuration</span>
+          </div>
+
+          <div class="terminal-context-grid">
+            <section class="terminal-schedule-card">
+              <div class="context-card-head">
+                <div><span>BERTH &amp; VESSEL PLAN</span><b>5 berths · 10 vessels in queue</b></div>
+                <small>24-hour planning window</small>
+              </div>
+
+              <div class="terminal-time-axis">
+                <span>00</span><span>04</span><span>08</span><span>12</span><span>16</span><span>20</span><span>24</span>
+              </div>
+
+              <div class="terminal-berth-row"><b>B1</b><div class="terminal-berth-track"><span class="tv tv-1">V01</span><span class="tv tv-2">V06</span></div></div>
+              <div class="terminal-berth-row"><b>B2</b><div class="terminal-berth-track"><span class="tv tv-3">V02</span><span class="tv tv-4">V07</span></div></div>
+              <div class="terminal-berth-row"><b>B3</b><div class="terminal-berth-track"><span class="tv tv-5">V03</span><span class="tv tv-6">V08</span></div></div>
+              <div class="terminal-berth-row"><b>B4</b><div class="terminal-berth-track"><span class="tv tv-7">V04</span><span class="tv tv-8">V09</span></div></div>
+              <div class="terminal-berth-row"><b>B5</b><div class="terminal-berth-track"><span class="tv tv-9">V05</span><span class="tv tv-10">V10</span></div></div>
+
+              <div class="vessel-queue">
+                <span>VESSEL QUEUE</span>
+                <div>
+                  <b>V01</b><b>V02</b><b>V03</b><b>V04</b><b>V05</b><b>V06</b><b>V07</b><b>V08</b><b>V09</b><b>V10</b>
+                </div>
+              </div>
+            </section>
+
+            <section class="material-network-card">
+              <div class="context-card-head">
+                <div><span>MATERIAL FLOW</span><b>Stockpiles &amp; reclaimers</b></div>
+                <small>Interdependent resources</small>
+              </div>
+
+              <div class="material-network">
+                <div class="stockpile-column">
+                  <span class="network-label">STOCKPILES</span>
+                  <div class="stockpile sp-a"><b>SP-A</b><small>68%</small></div>
+                  <div class="stockpile sp-b"><b>SP-B</b><small>42%</small></div>
+                  <div class="stockpile sp-c"><b>SP-C</b><small>81%</small></div>
+                  <div class="stockpile sp-d"><b>SP-D</b><small>55%</small></div>
+                </div>
+
+                <div class="network-arrows">
+                  <i>→</i><i>→</i><i>→</i><i>→</i>
+                </div>
+
+                <div class="reclaimer-column">
+                  <span class="network-label">RECLAIMERS</span>
+                  <div class="reclaimer"><b>R1</b><small>SP-A → B1</small></div>
+                  <div class="reclaimer"><b>R2</b><small>SP-C → B3</small></div>
+                  <div class="reclaimer"><b>R3</b><small>SP-D → B5</small></div>
+                </div>
+              </div>
+
+              <div class="reclaimer-schedule">
+                <span>RECLAIMER SCHEDULE</span>
+                <div><b>R1</b><i style="--start:4%;--width:34%"></i><i style="--start:58%;--width:24%"></i></div>
+                <div><b>R2</b><i style="--start:18%;--width:28%"></i><i style="--start:70%;--width:20%"></i></div>
+                <div><b>R3</b><i style="--start:38%;--width:40%"></i></div>
+              </div>
+            </section>
+
+            <aside class="terminal-kpi-card">
+              <div class="context-card-head">
+                <div><span>RECOVERY PERFORMANCE</span><b>Targets &amp; KPIs</b></div>
+                <small>Illustrative measures</small>
+              </div>
+
+              <div class="throughput-target">
+                <span>THROUGHPUT TARGET</span>
+                <b>320 kt/day</b>
+                <div><i></i></div>
+                <small>Illustrative target</small>
+              </div>
+
+              <div class="recovery-kpis">
+                <div><span>Delay impact</span><b>Track</b><small>Vessel &amp; queue delay</small></div>
+                <div><span>Berth changes</span><b>Track</b><small>Schedule deviation</small></div>
+                <div><span>Queue impact</span><b>Track</b><small>Downstream effects</small></div>
+                <div><span>Throughput loss</span><b>Track</b><small>Recovery trade-off</small></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="terminal-context-footer">
+            <span>BERTH PLAN</span><i>↔</i><span>VESSEL QUEUE</span><i>↔</i><span>STOCKPILES</span><i>↔</i><span>RECLAIMERS</span><i>↔</i><span>THROUGHPUT / KPIs</span>
+          </div>
         </div>
       </div>
     </section>
