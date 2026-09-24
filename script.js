@@ -50,7 +50,7 @@ function killSceneTweens(){
     '.chat-layer','.chat-card','.role-strip div','#chatResponse',
     '.confirm-layer','.confirm-card','.confirm-list div','.confirm-button',
     '.options-layer','.result-card','.result-grid div',
-    '.approval-layer','.approval-card','.approval-icon'
+    '.approval-layer','.approval-card','.approval-icon','.recovery-dashboard','.recovery-analysis div','.r-vessel'
   ]);
 }
 function hideLayers(){
@@ -190,9 +190,11 @@ function approvalScene(){
   hideLayers();
   prepareFocusScene();
   gsap.to('.approval-layer',{autoAlpha:1,duration:.2});
-  gsap.fromTo('.approval-card',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.5)'});
-  gsap.fromTo('.approval-icon',{scale:.4,rotation:-18},{scale:1,rotation:0,duration:.5,delay:.25,ease:'back.out(2)'});
-  title.textContent='Recovered plan ready for scheduler review';statusText.textContent='Human decision';
+  gsap.fromTo('.recovery-dashboard',{y:24,scale:.985,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'power3.out'});
+  gsap.fromTo('.r-vessel',{y:8,opacity:0},{y:0,opacity:1,stagger:.07,delay:.18,duration:.32,ease:'power2.out'});
+  gsap.fromTo('.recovery-analysis div',{y:10,opacity:0},{y:0,opacity:1,stagger:.07,delay:.28,duration:.32,ease:'power2.out'});
+  title.textContent='Recovered schedule and baseline comparison';
+  statusText.textContent='Ready for review';
   statusDot.style.background='#34c759';
   statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
 }

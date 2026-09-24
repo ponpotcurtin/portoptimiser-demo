@@ -186,17 +186,48 @@
           </div>
 
           <div class="approval-layer">
-            <div class="approval-card approval-card--final">
-              <span class="approval-icon">✓</span>
-              <div class="approval-copy">
-                <small>RECOVERED PLAN</small>
-                <h3>The represented berth conflict is resolved.</h3>
-                <p>Vessel B moves to Berth 1 after Vessel C. Vessel D stays on Berth 2. The scheduler remains in control.</p>
-                <div class="final-summary">
-                  <span><b>Vessel B</b>Berth 1 after C</span>
-                  <span><b>Vessel D</b>Berth 2 unchanged</span>
-                  <span><b>Decision authority</b>Scheduler</span>
+            <div class="recovery-dashboard">
+              <div class="recovery-head">
+                <div>
+                  <span>RECOVERED SCHEDULE</span>
+                  <h3>Recovered plan compared with the baseline</h3>
                 </div>
+                <span class="recovery-ready">Ready for scheduler review</span>
+              </div>
+
+              <div class="recovery-schedule">
+                <div class="recovery-times">
+                  <span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span>
+                </div>
+
+                <div class="recovery-row">
+                  <b>BERTH 1</b>
+                  <div class="recovery-track">
+                    <span class="r-vessel r-a">A <small>Vessel A</small></span>
+                    <span class="r-vessel r-c">C <small>Vessel C</small></span>
+                    <span class="r-vessel r-b">B <small>Vessel B · reassigned</small></span>
+                  </div>
+                </div>
+
+                <div class="recovery-row">
+                  <b>BERTH 2</b>
+                  <div class="recovery-track">
+                    <span class="baseline-b">Baseline B</span>
+                    <span class="r-vessel r-d">D <small>Vessel D · unchanged</small></span>
+                  </div>
+                </div>
+
+                <div class="recovery-legend">
+                  <span><i class="legend-current"></i>Recovered plan</span>
+                  <span><i class="legend-baseline"></i>Baseline position</span>
+                </div>
+              </div>
+
+              <div class="recovery-analysis">
+                <div><span>Vessel B</span><b>Berth 2 → Berth 1</b><small>After Vessel C</small></div>
+                <div><span>Vessel D</span><b>Unchanged</b><small>Berth 2 from 15:00</small></div>
+                <div><span>Berth conflict</span><b>Removed</b><small>No overlap in recovered example</small></div>
+                <div><span>Deviation from baseline</span><b>1 berth reassignment</b><small>Other assignments preserved</small></div>
               </div>
             </div>
           </div>
@@ -222,7 +253,7 @@
         <section class="step" data-scene="2"><div class="step__copy step__copy--source"><span class="eyebrow">03 — SCHEDULER INPUT</span><h2>Add context the data does not capture.</h2><p>The LLM translates natural-language guidance into model inputs.</p><small>LLM = interface, not scheduling engine.</small></div></section>
         <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — CONFIRM INTERPRETATION</span><h2>Check what the LLM understood.</h2><p>Confirm or revise the interpreted changes before they reach the scheduling engine.</p></div></section>
         <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — RECOMPUTE</span><h2>The scheduling engine compares recovery plans.</h2><p>It uses the current state, terminal constraints and confirmed scheduler input.</p></div></section>
-        <section class="step" data-scene="5"><div class="step__copy step__copy--source"><span class="eyebrow">06 — REVIEW</span><h2>Scheduler reviews the recovered plan.</h2><p>Accept it, reject it, or refine the instruction and rerun.</p></div></section>
+        <section class="step" data-scene="5"><div class="step__copy step__copy--source"><span class="eyebrow">06 — REVIEW</span><h2>Recovered schedule compared with the baseline.</h2><p>The changes and the resolved berth overlap are visible for scheduler review.</p></div></section>
       </div>
     </section>
 
