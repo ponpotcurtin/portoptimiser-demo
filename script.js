@@ -86,10 +86,11 @@ function disruptionScene(){
   resetTransientState();
   showSchedule();
 
-  // Scene 2 is one combined view: the updated data, resulting conflict and
-  // candidate recovery directions are all visible at the same time.
-  title.textContent='Automatic update → conflict → recovery options';
-  statusText.textContent='Conflict · 3 options';
+  // Scene 2 is one combined illustrative view. It shows the latest ETA,
+  // the resulting overlap in this example, and possible recovery directions.
+  // It does not imply a separate automated infeasibility-detection module.
+  title.textContent='Updated ETA and recovery directions';
+  statusText.textContent='Vessel B +4h';
   statusDot.style.background='#ff9f0a';
   statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
 

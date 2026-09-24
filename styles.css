@@ -149,15 +149,14 @@
   .final-summary b{font-size:7px}
 }
 
-
 /* Combined disruption + options scene */
 .decision-layer{
-  inset:auto 30px 205px 120px;
-  height:138px;
-  padding:30px 0 0;
+  inset:auto 36px 214px 120px;
+  height:96px;
+  padding:20px 0 0;
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
+  gap:12px;
   align-items:stretch;
   background:transparent;
   backdrop-filter:none;
@@ -168,11 +167,12 @@
   top:0;
   left:0;
   transform:none;
-  width:auto;
-  font-size:11px;
-  line-height:1.2;
+  width:100%;
+  font-size:8px;
+  line-height:1;
+  letter-spacing:.1em;
   font-weight:700;
-  color:var(--body);
+  color:var(--muted);
 }
 .decision-option,
 .d1,.d2,.d3{
@@ -183,39 +183,56 @@
   width:auto;
 }
 .decision-option{
-  padding:12px 10px;
+  min-height:70px;
+  padding:10px 12px;
   border:1px solid #e5e5ea;
-  border-radius:16px;
-  box-shadow:0 8px 22px rgba(0,0,0,.055);
+  border-radius:14px;
+  box-shadow:0 5px 16px rgba(0,0,0,.045);
   display:flex;
   flex-direction:column;
   align-items:flex-start;
   justify-content:center;
   text-align:left;
 }
-.decision-option b{font-size:9px;margin-bottom:5px}
-.decision-option span{font-size:11px;line-height:1.2;white-space:normal}
+.decision-option b{
+  margin:0;
+  font-size:11px;
+  line-height:1.15;
+  color:var(--ink);
+}
+.decision-option span{
+  margin-top:4px;
+  font-size:9px;
+  line-height:1.25;
+  color:var(--muted);
+  font-weight:500;
+  white-space:normal;
+}
 
 @media(max-width:800px){
   .decision-layer{
-    inset:auto 8px 190px 58px;
-    height:105px;
-    padding-top:22px;
+    inset:auto 8px 194px 58px;
+    height:76px;
+    padding-top:15px;
     gap:5px;
   }
   .decision-center{
     top:0;
-    font-size:7px;
-    width:100%;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    font-size:5.5px;
+    letter-spacing:.07em;
   }
   .decision-option{
-    width:auto;
-    padding:6px 5px;
+    min-height:58px;
+    padding:6px 6px;
     border-radius:9px;
   }
-  .decision-option b{font-size:6px;margin-bottom:3px}
-  .decision-option span{font-size:6.5px;line-height:1.15}
+  .decision-option b{
+    font-size:7px;
+    line-height:1.12;
+  }
+  .decision-option span{
+    margin-top:2px;
+    font-size:6px;
+    line-height:1.15;
+  }
 }
