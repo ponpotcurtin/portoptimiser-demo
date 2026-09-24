@@ -225,168 +225,37 @@ function restoreShell(){
   });
 }
 
-if(!reduced){
-  gsap.from('.hero__content',{y:36,opacity:0,duration:1.1,ease:'power3.out'});
-  gsap.to('.orb-a',{yPercent:-18,xPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-  gsap.to('.orb-b',{yPercent:20,xPercent:8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-  gsap.to('.port-vessel-bg',{xPercent:360,yPercent:-30,rotation:2,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
-  gsap.to('.yard-grid',{yPercent:-10,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+// Static, explicit scene navigation. The demonstration no longer depends on
+// scroll position, wheel interception, sticky-scene timing or swipe capture.
+const scenePrev = document.getElementById('scenePrev');
+const sceneNext = document.getElementById('sceneNext');
+const sceneCounter = document.getElementById('sceneCounter');
 
-  const story = document.querySelector('.story');
-  const storyVisual = document.querySelector('.story__visual');
-  const steps = Array.from(document.querySelectorAll('.step'));
-  let gestureLock = false;
-  let manualNavigation = false;
-  let touchStartY = null;
-
-  // Declare navigation state before creating ScrollTriggers. Some browsers
-  // (notably mobile Safari during refresh/layout) may evaluate trigger state
-  // immediately when a trigger is created.
-  steps.forEach((step,i)=>{
-    ScrollTrigger.create({
-      trigger:step,
-      start:'top 56%',
-      end:'bottom 44%',
-      onEnter:()=>{ if(!manualNavigation) activateScene(i); },
-      onEnterBack:()=>{ if(!manualNavigation) activateScene(i); },
-      onLeaveBack:()=>{ if(!manualNavigation) activateScene(Math.max(0,i-1)); }
-    });
-  });
-
-  function storyIsActive(){
-    const rect = story.getBoundingClientRect();
-    return rect.top <= 60 && rect.bottom >= window.innerHeight * .65;
+function updateSceneControls(){
+  if(sceneCounter) sceneCounter.textContent = `${activeScene + 1} / ${scenes.length}`;
+  if(scenePrev) scenePrev.disabled = activeScene === 0;
+  if(sceneNext){
+    sceneNext.disabled = activeScene === scenes.length - 1;
+    sceneNext.textContent = activeScene === scenes.length - 1 ? 'Complete' : 'Next →';
   }
-
-  function isStoryBoundaryExit(direction){
-    return (direction > 0 && activeScene === steps.length - 1) ||
-           (direction < 0 && activeScene === 0);
-  }
-
-  function goToScene(index, direction=1){
-    const next = Math.max(0, Math.min(index, steps.length - 1));
-    if(next === activeScene || !steps[next]){
-      restoreShell();
-      return;
-    }
-
-    gestureLock = true;
-    manualNavigation = true;
-    gsap.killTweensOf(shell);
-
-    gsap.to(shell,{
-      opacity:.18,
-      scale:.972,
-      y:direction > 0 ? -14 : 14,
-      filter:'blur(2px) saturate(.84)',
-      boxShadow:'0 36px 84px rgba(0,0,0,.13)',
-      duration:.15,
-      ease:'power2.in',
-      overwrite:true,
-      onComplete:()=>{
-        const targetY = window.scrollY + steps[next].getBoundingClientRect().top;
-
-        // Reposition the invisible trigger section immediately. The shell stays
-        // faded while this happens, so Safari never shows an intermediate page.
-        window.scrollTo({top:targetY,behavior:'auto'});
-        ScrollTrigger.update();
-        activateScene(next);
-
-        gsap.set(shell,{
-          opacity:.18,
-          scale:.974,
-          y:direction > 0 ? 18 : -18,
-          filter:'blur(2px) saturate(.84)'
-        });
-
-        gsap.to(shell,{
-          opacity:1,
-          scale:1,
-          y:0,
-          filter:'blur(0px) saturate(1)',
-          boxShadow:'0 20px 60px rgba(0,0,0,.08)',
-          duration:.34,
-          ease:'power3.out',
-          overwrite:true,
-          onComplete:()=>{
-            manualNavigation=false;
-            gestureLock=false;
-          }
-        });
-      }
-    });
-  }
-
-  window.addEventListener('wheel',(event)=>{
-    if(!storyIsActive() || gestureLock || Math.abs(event.deltaY) < 14) return;
-    const direction = event.deltaY > 0 ? 1 : -1;
-
-    // At the first/last story scene, release the gesture back to the browser
-    // so the user can continue naturally to the hero or the sections below.
-    if(isStoryBoundaryExit(direction)){
-      restoreShell();
-      return;
-    }
-
-    event.preventDefault();
-    setShellPull(.72,direction);
-    goToScene(activeScene + direction,direction);
-  },{passive:false});
-
-  // Mobile: capture gestures on the sticky visual itself. This makes the
-  // six demonstration scenes behave like deliberate slides instead of letting
-  // Safari free-scroll through the invisible trigger sections.
-  storyVisual.addEventListener('touchstart',(event)=>{
-    if(!storyIsActive() || gestureLock) return;
-    touchStartY = event.changedTouches[0]?.clientY ?? null;
-    gsap.killTweensOf(shell);
-  },{passive:true});
-
-  storyVisual.addEventListener('touchmove',(event)=>{
-    if(!storyIsActive() || gestureLock || touchStartY === null) return;
-    const y = event.changedTouches[0]?.clientY ?? touchStartY;
-    const delta = touchStartY - y;
-    const direction = delta >= 0 ? 1 : -1;
-
-    // Only release the browser at the true beginning/end of the story.
-    if(isStoryBoundaryExit(direction)){
-      restoreShell();
-      return;
-    }
-
-    event.preventDefault();
-    const progress = Math.min(Math.abs(delta) / 110, 1);
-    setShellPull(progress,direction);
-  },{passive:false});
-
-  storyVisual.addEventListener('touchend',(event)=>{
-    if(!storyIsActive() || gestureLock || touchStartY === null) return;
-    const endY = event.changedTouches[0]?.clientY ?? touchStartY;
-    const delta = touchStartY - endY;
-    touchStartY = null;
-
-    if(Math.abs(delta) < 34){
-      restoreShell();
-      return;
-    }
-
-    const direction = delta > 0 ? 1 : -1;
-
-    if(isStoryBoundaryExit(direction)){
-      restoreShell();
-      return;
-    }
-
-    event.preventDefault();
-    goToScene(activeScene + direction,direction);
-  },{passive:false});
-
-  storyVisual.addEventListener('touchcancel',()=>{
-    touchStartY = null;
-    restoreShell();
-  },{passive:true});
-
-  gsap.from('.about-grid article',{y:22,opacity:0,stagger:.08,duration:.45,scrollTrigger:{trigger:'.about-grid',start:'top 80%'}});
 }
-setSceneCaption(0);
-baseScene();
+
+function showScene(index){
+  activeScene = Math.max(0, Math.min(index, scenes.length - 1));
+  setSceneCaption(activeScene);
+  scenes[activeScene]();
+  updateSceneControls();
+}
+
+scenePrev?.addEventListener('click',()=>showScene(activeScene - 1));
+sceneNext?.addEventListener('click',()=>showScene(activeScene + 1));
+
+if(!reduced){
+  gsap.from('.hero__content',{y:22,opacity:0,duration:.65,ease:'power2.out'});
+  gsap.from('.about-grid article',{
+    y:16,opacity:0,stagger:.06,duration:.35,
+    scrollTrigger:{trigger:'.about-grid',start:'top 85%'}
+  });
+}
+
+showScene(0);
