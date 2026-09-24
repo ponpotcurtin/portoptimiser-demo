@@ -6,7 +6,7 @@ const title = document.getElementById('sceneTitle');
 const status = document.getElementById('statusPill');
 const statusText = status.querySelector('span');
 const statusDot = status.querySelector('i');
-const promptTarget = "I'm the scheduler. Reassign Vessel B to Berth 1 after Vessel C finishes. Keep all other vessel assignments and their reclaiming schedules unchanged.";
+const promptTarget = "Berth 1 is available after Vessel C finishes. Reassign Vessel B there, and keep all other vessel assignments and reclaiming schedules unchanged.";
 let typingTimer = null;
 
 const captionIndex = document.getElementById('captionIndex');
@@ -85,7 +85,7 @@ function baseScene(){
 function disruptionScene(){
   resetTransientState();
   showSchedule();
-  title.textContent='Example disruption: Vessel B +4h';statusText.textContent='Conflict';
+  title.textContent='Operational data update: Vessel B +4h';statusText.textContent='Auto-updated';
   statusDot.style.background='#ff9f0a';statusDot.style.boxShadow='0 0 0 5px rgba(255,159,10,.12)';
   gsap.to('.delay-ghost',{opacity:1,duration:.3});
   gsap.to('.delayed-start-marker',{opacity:1,duration:.3,delay:.4});
@@ -119,7 +119,7 @@ function decisionScene(){
   gsap.to('.decision-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.decision-center',{scale:.8,opacity:0},{scale:1,opacity:1,duration:.4});
   gsap.fromTo('.decision-option',{y:30,opacity:0},{y:0,opacity:1,stagger:.12,duration:.5,ease:'power3.out'});
-  title.textContent='Candidate rescheduling directions';statusText.textContent='see options';
+  title.textContent='Conflict detected → evaluate recovery directions';statusText.textContent='Options';
 }
 function engineScene(){
   hideLayers();
@@ -153,7 +153,7 @@ function chatScene(){
   gsap.to('.chat-layer',{autoAlpha:1,duration:.25});
   gsap.fromTo('.chat-card',{y:28,scale:.97,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'power3.out',onComplete:typePrompt});
   gsap.fromTo('.role-strip div',{y:15,opacity:0},{y:0,opacity:1,stagger:.08,delay:.35,duration:.35});
-  title.textContent='Add operational context to the rescheduling task';statusText.textContent='Refine';
+  title.textContent='Scheduler expertise → validated model input';statusText.textContent='LLM bridge';
 }
 function confirmationScene(){
   hideLayers();
@@ -174,7 +174,7 @@ function optionsScene(){
   gsap.to('.options-layer',{autoAlpha:1,duration:.2});
   gsap.fromTo('.result-card',{y:30,opacity:0,scale:.985},{y:0,opacity:1,scale:1,duration:.55,ease:'power3.out'});
   gsap.fromTo('.result-grid div',{y:10,opacity:0},{y:0,opacity:1,stagger:.08,delay:.18,duration:.35,ease:'power2.out'});
-  title.textContent='Review recomputed schedule';statusText.textContent='Review';
+  title.textContent='Scheduling engine recomputes and compares recovery plans';statusText.textContent='Recomputed';
 }
 function approvalScene(){
   hideLayers();
@@ -182,10 +182,11 @@ function approvalScene(){
   gsap.to('.approval-layer',{autoAlpha:1,duration:.2});
   gsap.fromTo('.approval-card',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(1.5)'});
   gsap.fromTo('.approval-icon',{scale:.4,rotation:-18},{scale:1,rotation:0,duration:.5,delay:.25,ease:'back.out(2)'});
-  title.textContent='Scheduler selects the revised schedule';statusText.textContent='Human decision';
+  title.textContent='Recovered plan ready for scheduler review';statusText.textContent='Human decision';
   statusDot.style.background='#34c759';
+  statusDot.style.boxShadow='0 0 0 5px rgba(52,199,89,.12)';
 }
-const scenes=[baseScene,disruptionScene,impactScene,decisionScene,chatScene,confirmationScene,engineScene,optionsScene,approvalScene];
+const scenes=[baseScene,disruptionScene,decisionScene,chatScene,optionsScene,approvalScene];
 
 function activateScene(i){
   activeScene = Math.max(0, Math.min(i, scenes.length - 1));
@@ -328,7 +329,7 @@ if(!reduced){
     const delta = touchStartY - y;
     const direction = delta >= 0 ? 1 : -1;
 
-    // Do not trap the user's swipe at the beginning or end of the 9-scene story.
+    // Do not trap the user's swipe at the beginning or end of the 6-scene story.
     // Allow Safari to take over and continue down to the PoC/industry sections.
     if(isStoryBoundaryExit(direction)){
       restoreShell();
