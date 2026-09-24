@@ -115,6 +115,28 @@
     border-radius: 99px;
     background: rgba(0,113,227,.22);
   }
+
+  /* Clear left-to-right arrows for each mobile workflow row. */
+  .workflow-inputs span:first-child,
+  .workflow-bridge,
+  .workflow-engine {
+    position: relative;
+  }
+  .workflow-inputs span:first-child::after,
+  .workflow-bridge::after,
+  .workflow-engine::after {
+    content: "→";
+    position: absolute;
+    right: -11px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    color: #8e8e93;
+    pointer-events: none;
+  }
   .scroll-cue {
     margin-top: 23px;
     gap: 7px;
