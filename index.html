@@ -176,12 +176,19 @@
                 <div><span class="option-kicker">SCHEDULING ENGINE · ILLUSTRATIVE</span><h3>Recompute and compare recovery plans</h3></div>
                 <span class="result-status">Represented constraints checked</span>
               </div>
+              <div class="engine-flow" aria-label="Confirmed inputs pass through the scheduling engine to produce recovery options">
+                <div class="engine-flow__box engine-flow__inputs"><span>INPUTS</span><b>Confirmed planning inputs</b><small>Current state</small><small>Terminal constraints</small><small>Confirmed scheduler input</small></div>
+                <div class="engine-flow__arrow" aria-hidden="true">→</div>
+                <div class="engine-flow__box engine-flow__core"><span>SCHEDULING ENGINE</span><b>Recompute plans</b><small>Check represented constraints</small><small>Compare recovery trade-offs</small></div>
+                <div class="engine-flow__arrow" aria-hidden="true">→</div>
+                <div class="engine-flow__box engine-flow__outputs"><span>OUTPUTS</span><b>Recovery options</b><small>Alternative recovery directions</small><small>For scheduler review</small></div>
+              </div>
               <div class="result-grid result-grid--vertical">
                 <div><span>Option 1 · Hold Vessel B</span><b>B waits until D clears</b></div>
                 <div><span>Option 2 · Prioritise Vessel B</span><b>D is delayed</b></div>
                 <div class="result-grid__focus"><span>Option 3 · Move Vessel B</span><b>Berth 1 after Vessel C</b></div>
               </div>
-              <div class="result-note">Current state + constraints + confirmed scheduler input → recovery plans.</div>
+              <div class="result-note">Confirmed inputs are passed to the scheduling engine, which recomputes and compares recovery options.</div>
             </article>
           </div>
 
