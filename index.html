@@ -15,20 +15,29 @@
   <header class="nav" aria-label="Primary">
     <div class="nav__inner">
       <a class="brand" href="#top" aria-label="PortOptimiser home">PortOptimiser</a>
-      <span class="nav__meta">Illustrative demonstration example</span>
+      <span class="nav__meta">Illustrative example</span>
     </div>
   </header>
 
   <main id="top">
     <section class="hero panel panel--light">
       <div class="hero__content reveal">
-        <span class="eyebrow">PORT SCHEDULE RECOVERY · ILLUSTRATIVE EXAMPLE</span>
+        <span class="eyebrow">PORT SCHEDULE RECOVERY</span>
         <h1>A vessel is four hours late.<br><span class="gradient-text">How should the berth schedule be rescheduled?</span></h1>
-        <p class="lead">Illustrative example: connected operational systems provide the latest schedule data; when extra scheduler knowledge is needed, the LLM turns that expertise into validated inputs for the scheduling engine.</p>
-        <div class="hero-preview" aria-hidden="true">
-          <div class="hero-preview__top"><strong>PortOptimiser</strong><span>Schedule Recovery</span></div>
-          <div class="hero-preview__status"><i></i><b>Example disruption</b><span>Vessel B +4h</span></div>
-          <div class="hero-preview__result"><span>Operational data + scheduler expertise</span><b>Two input paths</b></div>
+        <p class="lead">PortOptimiser combines current operational data, scheduler expertise and optimisation to support berth schedule recovery.</p>
+        <div class="hero-workflow" aria-label="PortOptimiser workflow">
+          <div class="hero-workflow__head"><strong>PortOptimiser workflow</strong><span>Human-in-the-loop recovery</span></div>
+          <div class="hero-workflow__body">
+            <div class="workflow-inputs">
+              <span><b>Operational data</b><small>Current state</small></span>
+              <span><b>Scheduler expertise</b><small>Extra context</small></span>
+            </div>
+            <div class="workflow-bridge"><b>LLM interface</b><small>Translates scheduler input</small></div>
+            <i>→</i>
+            <div class="workflow-engine"><b>Scheduling engine</b><small>Evaluates recovery plans</small></div>
+            <i>→</i>
+            <div class="workflow-output"><b>Recovery options</b><small>Scheduler review</small></div>
+          </div>
         </div>
         <div class="scroll-cue" aria-hidden="true"><span></span><small>Scroll to begin</small></div>
       </div>
@@ -55,7 +64,7 @@
         <div class="terminal-shell">
           <div class="terminal-topline">
             <div>
-              <span class="micro">ILLUSTRATIVE DEMONSTRATION</span>
+              <span class="micro">ILLUSTRATIVE EXAMPLE</span>
               <strong id="sceneTitle">Original operating plan</strong>
             </div>
             <div class="status-pill" id="statusPill"><i></i><span>Feasible</span></div>
@@ -83,8 +92,8 @@
 
           <div class="dependency-row">
             <div class="dependency-label">
-              <span>EXAMPLES OF OPERATIONAL INTERDEPENDENCIES</span>
-              <small class="auto-sync"><i></i>Current operational data from connected systems</small>
+              <span>OPERATIONAL INTERDEPENDENCIES</span>
+              <small class="auto-sync"><i></i>Current data from connected systems</small>
             </div>
             <div class="dependency-flow">
               <div class="dependency-node"><b>Stockpile</b><span>Material ready?</span></div>
@@ -119,20 +128,20 @@
 
           <div class="chat-layer">
             <div class="chat-card">
-              <div class="chat-head"><span class="avatar">S</span><div><b>Scheduler expertise</b><small>Knowledge that may not exist in operational data</small></div></div>
+              <div class="chat-head"><span class="avatar">S</span><div><b>Scheduler input</b><small>Context not captured in the data</small></div></div>
               <div class="prompt-line"><span id="typedPrompt"></span><i class="caret"></i></div>
               <div class="chat-response" id="chatResponse">
                 <span class="thinking"><i></i><i></i><i></i></span>
-                <p>Scheduler expertise interpreted as proposed scheduling inputs. The scheduler reviews the interpretation before it is sent to the optimisation model.</p>
+                <p>Instruction translated into model inputs for review.</p>
               </div>
             </div>
             <div class="role-strip" aria-label="PortOptimiser information flow">
-              <div><b>Operational data systems</b><span>Automatically update the current schedule and operating state</span></div>
-              <div><b>Scheduler</b><span>Adds expertise, priorities and context that are not captured in the data</span></div>
-              <div><b>LLM interface</b><span>Translates the scheduler’s instruction into explicit, validated model inputs</span></div>
-              <div><b>Scheduling engine</b><span>Uses the data and confirmed inputs to compute recovery plans</span></div>
+              <div><b>Operational data</b><span>Current state</span></div>
+              <div><b>Scheduler</b><span>Extra context</span></div>
+              <div><b>LLM interface</b><span>Translate input</span></div>
+              <div><b>Scheduling engine</b><span>Recompute plans</span></div>
             </div>
-            <div class="role-note"><strong>The LLM is the interaction bridge.</strong> It does not replace the scheduling engine or become the source of operational data.</div>
+            <div class="role-note">LLM = interaction layer. Optimisation = scheduling engine.</div>
           </div>
 
           <div class="confirm-layer">
@@ -169,9 +178,9 @@
                 <div><span>Option 1 · Hold Vessel B</span><b>B waits until D clears</b></div>
                 <div><span>Option 2 · Prioritise Vessel B</span><b>D is delayed</b></div>
                 <div class="result-grid__focus"><span>Option 3 · Move Vessel B</span><b>Berth 1 after Vessel C</b></div>
-                <div><span>Decision support</span><b>Compare operational trade-offs</b></div>
+                <div><span>Comparison</span><b>Operational trade-offs</b></div>
               </div>
-              <div class="result-note">The scheduling engine evaluates recovery plans using the current operating state, represented constraints and the scheduler’s confirmed instruction. Option 3 is carried forward only as the illustrative path in this demo.</div>
+              <div class="result-note">Current state + constraints + confirmed scheduler input → recovery plans.</div>
             </article>
           </div>
 
@@ -179,9 +188,9 @@
             <div class="approval-card approval-card--final">
               <span class="approval-icon">✓</span>
               <div class="approval-copy">
-                <small>RECOVERED PLAN + HUMAN DECISION</small>
+                <small>RECOVERED PLAN</small>
                 <h3>The represented berth conflict is resolved.</h3>
-                <p>Vessel B moves to Berth 1 after Vessel C, while Vessel D remains on Berth 2. PortOptimiser presents the recovered plan; the scheduler can accept it, reject it or refine the instruction and rerun the scheduling engine.</p>
+                <p>Vessel B moves to Berth 1 after Vessel C. Vessel D stays on Berth 2. The scheduler remains in control.</p>
                 <div class="final-summary">
                   <span><b>Vessel B</b>Berth 1 after C</span>
                   <span><b>Vessel D</b>Berth 2 unchanged</span>
@@ -198,57 +207,41 @@
           </div>
 
           <div class="scene-caption" id="sceneCaption">
-            <div class="scene-caption__meta"><span id="captionIndex">01</span><b id="captionEyebrow">EXAMPLE BASELINE</b></div>
-            <h2 id="captionTitle">Vessel B is planned on Berth 2 from 10:00–14:00.</h2>
-            <p id="captionBody">Vessel D is planned on the same berth from 15:00. This is the simplified baseline used only for this demonstration.</p>
+            <div class="scene-caption__meta"><span id="captionIndex">01</span><b id="captionEyebrow">BASELINE</b></div>
+            <h2 id="captionTitle">Current berth plan.</h2>
+            <p id="captionBody">Vessel B: Berth 2, 10:00–14:00. Vessel D follows from 15:00.</p>
             <small id="captionNote"></small>
           </div>
         </div>
       </div>
 
       <div class="story__steps">
-        <section class="step" data-scene="0"><div class="step__copy step__copy--source"><span class="eyebrow">01 — EXAMPLE BASELINE</span><h2>The current operating plan is already in the scheduling system.</h2><p>Vessel B is planned on Berth 2 from 10:00–14:00 and Vessel D from 15:00. This simplified baseline represents the current state before a disruption.</p></div></section>
-        <section class="step" data-scene="1"><div class="step__copy step__copy--source"><span class="eyebrow">02 — UPDATED OPERATING PICTURE</span><h2>Vessel B’s delay overlaps with Vessel D on Berth 2.</h2><p>The latest ETA can come from connected operational systems. In this example, we show its effect on the berth plan together with three recovery directions the scheduler could consider.</p><small>The PoC does not require a separate AI infeasibility-detection module.</small></div></section>
-        <section class="step" data-scene="2"><div class="step__copy step__copy--source"><span class="eyebrow">03 — SCHEDULER EXPERTISE → MODEL INPUT</span><h2>The LLM bridges the scheduler and the scheduling engine.</h2><p>Operational data provides the current state automatically. The scheduler adds expertise, priorities or context in natural language; the LLM translates that input into explicit model changes for review before optimisation.</p><small>The LLM is the interaction layer—not the scheduling engine and not the source of operational data.</small></div></section>
-        <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — RECOMPUTE & COMPARE</span><h2>The scheduling engine recomputes recovery plans.</h2><p>It uses the updated operating state, represented terminal constraints and confirmed scheduler inputs to generate and compare feasible recovery directions.</p><small>This demo uses illustrative options; a partner PoC would use terminal-specific objectives and KPIs.</small></div></section>
-        <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — RECOVERED PLAN + HUMAN DECISION</span><h2>PortOptimiser supports the decision; the scheduler remains in control.</h2><p>The recovered plan resolves the represented conflict in this example. The scheduler reviews the result and can accept it, reject it or refine the instruction and rerun the scheduling engine.</p></div></section>
+        <section class="step" data-scene="0"><div class="step__copy step__copy--source"><span class="eyebrow">01 — BASELINE</span><h2>Current berth plan.</h2><p>Vessel B: Berth 2, 10:00–14:00. Vessel D follows from 15:00.</p></div></section>
+        <section class="step" data-scene="1"><div class="step__copy step__copy--source"><span class="eyebrow">02 — DISRUPTION</span><h2>A four-hour delay creates an overlap on Berth 2.</h2><p>The latest ETA can come from connected operational systems. Three recovery directions are shown.</p></div></section>
+        <section class="step" data-scene="2"><div class="step__copy step__copy--source"><span class="eyebrow">03 — SCHEDULER INPUT</span><h2>Add context the data does not capture.</h2><p>The LLM translates natural-language guidance into model inputs for review.</p><small>LLM = interface, not scheduling engine.</small></div></section>
+        <section class="step" data-scene="3"><div class="step__copy step__copy--source"><span class="eyebrow">04 — RECOMPUTE</span><h2>The scheduling engine compares recovery plans.</h2><p>It uses the current state, terminal constraints and confirmed scheduler input.</p></div></section>
+        <section class="step" data-scene="4"><div class="step__copy step__copy--source"><span class="eyebrow">05 — REVIEW</span><h2>Scheduler reviews the recovered plan.</h2><p>Accept it, reject it, or refine the instruction and rerun.</p></div></section>
       </div>
     </section>
 
-    <section class="poc panel panel--light">
-      <div class="poc__inner">
-        <span class="eyebrow">FROM THIS EXAMPLE TO A PARTNER POC</span>
-        <h2>This page is one simplified demonstration example.<br><span class="muted">The real PoC would be configured around the partner's terminal.</span></h2>
-        <div class="poc-flow">
-          <div><b>01</b><span>Use the operational data sources that provide the current schedule and port state</span></div>
-          <div><b>02</b><span>Represent the partner’s terminal layout, resources, sequencing rules and recovery constraints</span></div>
-          <div><b>03</b><span>Capture scheduler expertise and priorities through the LLM interface and validate the translated model inputs</span></div>
-          <div><b>04</b><span>Use the scheduling engine to generate and compare recovery plans against partner-relevant objectives and KPIs</span></div>
-          <div><b>05</b><span>Validate whether the workflow helps schedulers respond more quickly and systematically to disruption</span></div>
+    <section class="collaboration panel panel--soft">
+      <div class="collaboration__inner">
+        <span class="eyebrow">INDUSTRY COLLABORATION</span>
+        <h2>Test PortOptimiser on a real recovery scenario.</h2>
+        <p>We are seeking industry input on one disruption, the constraints that matter, and how your team defines a good recovery.</p>
+        <div class="collaboration-tags">
+          <span>Disruption scenario</span>
+          <span>Operational constraints</span>
+          <span>Recovery priorities / KPIs</span>
         </div>
       </div>
     </section>
 
-    <section class="partner panel panel--soft">
-      <div class="partner__inner">
-        <span class="eyebrow">INDUSTRY VALIDATION</span>
-        <h2>Does this reflect how recovery works in your operation?</h2>
-        <p class="lead">The purpose of the industry discussion is to replace the simplified assumptions in this example with the way recovery actually works in your terminal.</p>
-        <div class="question-grid">
-          <div><span>01</span><p>What happens today when the schedule is disrupted?</p></div>
-          <div><span>02</span><p>Which constraints matter most in your terminal?</p></div>
-          <div><span>03</span><p>What does a good recovery look like to your team?</p></div>
-          <div><span>04</span><p>Which representative scenario should the PoC test?</p></div>
-        </div>
-        <div class="pathway"><span>Operational discussion</span><i>→</i><span>Representative scenario</span><i>→</i><span>Constraints & KPIs</span><i>→</i><span>PoC validation</span></div>
-        <div class="disclaimer">Illustrative demonstration only. The vessel timings, berth assignments, recovery actions and constraints on this page are simplified examples and do not represent a specific terminal or validated optimisation result.</div>
-      </div>
-    </section>
     <section class="about panel panel--light">
       <div class="about__inner">
         <span class="eyebrow">WHO'S BEHIND PORTOPTIMISER</span>
         <h2>Optimisation expertise,<br><span class="gradient-text">shaped with industry.</span></h2>
-        <p class="about__lead">PortOptimiser is an early-stage proof of concept being developed by the Curtin Centre for Optimisation and Decision Science at Curtin University to explore human-in-the-loop decision support for port schedule disruption recovery. This PoC is the first step toward a broader platform for disruption recovery and complex rescheduling across ports, supply chains, and other operational domains.</p>
+        <p class="about__lead">An early-stage Curtin University proof of concept for human-in-the-loop port schedule recovery.</p>
         <div class="about-grid">
           <article>
             <span>PROJECT LEAD</span>
@@ -265,15 +258,6 @@
             <h3>Optimisation & decision support</h3>
             <p>Mathematical optimisation, decomposition methods, and decision-support modelling for complex operational problems.</p>
           </article>
-          <article>
-            <span>INDUSTRY COLLABORATION</span>
-            <h3>Help us make the PoC operationally realistic</h3>
-            <p>We are looking for industry input on recovery workflows, terminal constraints, meaningful KPIs, and one representative disruption scenario.</p>
-          </article>
-        </div>
-        <div class="about-cta">
-          <strong>Interested in testing the concept on a real terminal scenario?</strong>
-          <span>Start with one disruption, the constraints that matter, and what a good recovery means in your operation.</span>
         </div>
       </div>
     </section>

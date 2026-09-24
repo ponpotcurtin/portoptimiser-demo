@@ -377,10 +377,7 @@ if(!reduced){
     restoreShell();
   },{passive:true});
 
-  gsap.from('.poc-flow div',{y:24,opacity:0,stagger:.09,duration:.45,scrollTrigger:{trigger:'.poc-flow',start:'top 75%'}});
-  gsap.from('.question-grid div',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.question-grid',start:'top 78%'}});
-  gsap.from('.about-grid article',{y:28,opacity:0,stagger:.1,duration:.55,scrollTrigger:{trigger:'.about-grid',start:'top 78%'}});
-  gsap.from('.about-cta',{y:20,opacity:0,duration:.55,scrollTrigger:{trigger:'.about-cta',start:'top 84%'}});
+  gsap.from('.about-grid article',{y:22,opacity:0,stagger:.08,duration:.45,scrollTrigger:{trigger:'.about-grid',start:'top 80%'}});
 }
 setSceneCaption(0);
 baseScene();

@@ -236,3 +236,137 @@
     line-height:1.15;
   }
 }
+
+
+/* Compact pitch layout */
+.hero__content{padding-top:104px}
+.hero .lead{max-width:800px;margin-top:18px}
+.hero-workflow{
+  width:min(760px,92vw);
+  margin:28px auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(210,210,215,.72);
+  border-radius:20px;
+  padding:14px 16px 13px;
+  box-shadow:0 14px 38px rgba(0,0,0,.055);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  text-align:left;
+}
+.hero-workflow__head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid #ececf0;
+}
+.hero-workflow__head strong{font-size:12px}
+.hero-workflow__head span{font-size:9px;color:var(--muted);font-weight:600}
+.hero-workflow__body{
+  display:grid;
+  grid-template-columns:1.25fr 1fr auto 1.15fr auto 1fr;
+  align-items:center;
+  gap:9px;
+  padding-top:11px;
+}
+.workflow-inputs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.workflow-inputs span,
+.workflow-bridge,
+.workflow-engine,
+.workflow-output{
+  min-width:0;
+  padding:9px 10px;
+  border-radius:12px;
+  background:#f7f7f9;
+  border:1px solid #ececf0;
+}
+.workflow-inputs span:last-child{background:#fff8ef;border-color:#f3dfc5}
+.workflow-bridge{background:#f4f0ff;border-color:#e4dbff}
+.workflow-engine{background:#eef6ff;border-color:#d8eaff}
+.workflow-output{background:#eef8ef;border-color:#dbeedc}
+.hero-workflow b{display:block;font-size:9px;line-height:1.15}
+.hero-workflow small{display:block;margin-top:3px;font-size:7px;line-height:1.2;color:var(--muted)}
+.hero-workflow__body>i{font-style:normal;color:#8e8e93;font-size:12px;text-align:center}
+.scroll-cue{margin-top:32px}
+
+.scene-caption{min-height:146px;padding:15px 18px}
+.scene-caption h2{font-size:clamp(19px,1.8vw,26px)}
+.scene-caption p{margin-top:6px}
+.scene-caption small{margin-top:5px}
+
+.collaboration{min-height:auto}
+.collaboration__inner{
+  width:min(1100px,92vw);
+  padding:76px 0;
+}
+.collaboration h2{
+  margin:0;
+  max-width:820px;
+  font-size:clamp(36px,4.6vw,62px);
+  line-height:1;
+  letter-spacing:-.04em;
+}
+.collaboration p{
+  max-width:760px;
+  margin:20px 0 0;
+  font-size:17px;
+  line-height:1.45;
+  color:var(--body);
+}
+.collaboration-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:24px;
+}
+.collaboration-tags span{
+  padding:9px 12px;
+  border-radius:980px;
+  background:#fff;
+  border:1px solid #e5e5ea;
+  font-size:10px;
+  font-weight:600;
+}
+
+.about__inner{padding:82px 0}
+.about h2{font-size:clamp(42px,5.2vw,66px)}
+.about__lead{max-width:720px;margin-top:20px;font-size:17px}
+.about-grid{grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+.about-grid article{padding:22px;border-radius:22px}
+.about-grid h3{font-size:18px;margin:14px 0 8px}
+.footer{padding-top:28px;padding-bottom:28px}
+
+@media(max-width:800px){
+  .hero__content{padding-top:88px}
+  .hero .lead{font-size:15px;line-height:1.4;margin-top:16px}
+  .hero-workflow{margin-top:20px;padding:11px 12px}
+  .hero-workflow__head{padding-bottom:8px}
+  .hero-workflow__head strong{font-size:10px}
+  .hero-workflow__head span{font-size:7px}
+  .hero-workflow__body{
+    grid-template-columns:1fr auto 1fr;
+    grid-template-areas:
+      "inputs arrow1 engine"
+      "bridge arrow2 output";
+    gap:6px;
+  }
+  .workflow-inputs{grid-area:inputs;grid-template-columns:1fr;gap:4px}
+  .workflow-bridge{grid-area:bridge}
+  .workflow-engine{grid-area:engine}
+  .workflow-output{grid-area:output}
+  .hero-workflow__body>i:nth-of-type(1){grid-area:arrow1}
+  .hero-workflow__body>i:nth-of-type(2){grid-area:arrow2}
+  .workflow-inputs span,.workflow-bridge,.workflow-engine,.workflow-output{padding:7px}
+  .hero-workflow b{font-size:7px}
+  .hero-workflow small{font-size:6px}
+  .scroll-cue{margin-top:24px}
+  .scene-caption{min-height:154px;padding:11px 12px}
+  .collaboration__inner{padding:58px 0}
+  .collaboration h2{font-size:38px}
+  .collaboration p{font-size:15px}
+  .about__inner{padding:64px 0}
+  .about h2{font-size:40px}
+  .about__lead{font-size:15px}
+  .about-grid{grid-template-columns:1fr;margin-top:28px}
+}
