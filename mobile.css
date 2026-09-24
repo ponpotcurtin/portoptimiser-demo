@@ -62,17 +62,16 @@
   }
   .hero-workflow__head strong { font-size: 13px; }
   .hero-workflow__body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     align-items: stretch;
   }
   .hero-workflow__body > i { display: none; }
   .workflow-inputs {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
   .workflow-inputs span,
   .workflow-bridge,
@@ -80,7 +79,7 @@
   .workflow-engine,
   .workflow-output {
     min-width: 0;
-    min-height: 51px;
+    min-height: 60px;
     padding: 9px 10px;
     border-radius: 12px;
   }
@@ -116,20 +115,22 @@
     background: rgba(0,113,227,.22);
   }
 
-  /* Clear left-to-right arrows for each mobile workflow row. */
-  .workflow-inputs span:first-child,
+  /* Vertical arrows between workflow steps. */
+  .workflow-inputs span,
   .workflow-bridge,
+  .workflow-confirm,
   .workflow-engine {
     position: relative;
   }
-  .workflow-inputs span:first-child::after,
+  .workflow-inputs span::after,
   .workflow-bridge::after,
+  .workflow-confirm::after,
   .workflow-engine::after {
-    content: "→";
+    content: "↓";
     position: absolute;
-    right: -11px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
     z-index: 5;
     font-size: 13px;
     line-height: 1;
