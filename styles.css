@@ -419,3 +419,35 @@
   .workflow-confirm small{font-size:6.5px}
   .confirm-card{width:100%;padding:11px 12px}
 }
+
+
+/* Vertical recovery options */
+.result-grid--vertical{
+  grid-template-columns:1fr;
+  gap:0;
+}
+.result-grid--vertical>div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:14px 2px;
+}
+.result-grid--vertical .result-grid__focus{
+  margin:4px 0;
+}
+@media(max-width:800px){
+  .result-grid--vertical{
+    grid-template-columns:1fr;
+  }
+  .result-grid--vertical>div{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    padding:8px 1px;
+  }
+  .result-grid--vertical b{
+    text-align:right;
+  }
+}
